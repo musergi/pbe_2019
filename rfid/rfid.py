@@ -14,6 +14,8 @@ class RfidReaderI2C(RfidReader):
 
     def read_uid(self):
         card_data = self.device.read_mifare().get_data()
+        for byte in card_data:
+            print(byte)
         return ''.join('{:02x}'.format(x) for x in card_data[1:-1])
 
 if __name__ == '__main__':
