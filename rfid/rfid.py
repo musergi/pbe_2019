@@ -1,4 +1,4 @@
-import py532lib
+from py532lib.i2c import Pn532_i2c
 
 class RfidReader:
     def __init__(self):
@@ -9,7 +9,7 @@ class RfidReader:
 
 class RfidReaderI2C(RfidReader):
     def __init__(self):
-        self.device = py532lib.i2c.Pn532_i2c()
+        self.device = Pn532_i2c()
         self.device.SAMconfigure()
 
     def read_uid(self):
