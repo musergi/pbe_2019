@@ -3,8 +3,9 @@ import threading
 
 # Module imports
 from model import RfidReader_pn532_i2c
-from view import WAITING_UID_TEXT, READ_UID_TEXT
 
+WAITING_UID_TEXT = 'Insert card for uid display'
+READ_UID_TEXT = 'Read card with uid {}'
 
 class Controller:
     def __init__(self, window):
