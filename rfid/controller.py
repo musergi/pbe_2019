@@ -15,7 +15,7 @@ class Controller:
         self._lock = threading.Lock()
 
         # Start uid waiter
-        self._uid_waiter = threading.Thread(target=set_uid, daemon=True)
+        self._uid_waiter = threading.Thread(target=self.set_uid, daemon=True)
 
     def clear_uid(self):
         print('[Controller] - Clearing uid')
@@ -29,6 +29,6 @@ class Controller:
             self._window.set_label(READ_UID_TEXT.format(uid))
 
         # Create another waiter before closing previous
-        self._uid_waiter = threading.Thread(target=set_uid, daemon=True)
+        self._uid_waiter = threading.Thread(target=self.set_uid, daemon=True)
 
 
