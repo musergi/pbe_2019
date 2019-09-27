@@ -2,8 +2,8 @@
 import threading
 
 # Module imports
-from .model import RfidReader_pn532_i2c
-from .view import WAITING_UID_TEXT, READ_UID_TEXT
+from model import RfidReader_pn532_i2c
+from view import WAITING_UID_TEXT, READ_UID_TEXT
 
 
 class Controller:
