@@ -13,12 +13,15 @@ class Window(Gtk.Window):
         Gtk.Window.__init__(self, title=WINDOW_CAPTION)
         self.connect("destroy", Gtk.main_quit)
 
+        self.grid_layout = Gtk.Grid()
+        self.add(self.grid_layout)
+
         self.label = Gtk.Label(label=WAITING_UID_TEXT)
-        self.add(self.label)
+        self.grid_layour.attach(self.label, 1, 1, 1, 1)
 
         self.button = Gtk.Button(label=CLEAR_BUTTON_TEXT)
         self.button .connect('clicked', self.button_action)
-        self.add(self.button)
+        self.grid_layour.button(self.label, 1, 2, 1, 1)
 
     def button_action(self, widget):
         print('Button pressed')
