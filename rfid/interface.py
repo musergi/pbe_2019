@@ -7,7 +7,6 @@ WINDOW_CAPTION = 'Rfid app'
 class Window(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self, title=WINDOW_CAPTION)
-        self.connect("destroy", Gtk.main_quit)
 
         self.button = Gtk.Button(label='Click here')
         self.button .connect('clicked', self.button_action)
@@ -19,4 +18,5 @@ class Window(Gtk.Window):
 if __name__ == '__main__':
     window = Window()
     window.show()
+    window.connect("destroy", Gtk.main_quit)
     Gtk.main()
