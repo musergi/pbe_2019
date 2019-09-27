@@ -21,7 +21,7 @@ class Window(Gtk.Window):
 
         self.button = Gtk.Button(label=CLEAR_BUTTON_TEXT)
         self.button .connect('clicked', self.button_action)
-        self.grid_layout.button(self.label, 1, 2, 1, 1)
+        self.grid_layout.attach(self.label, 1, 2, 1, 1)
 
     def button_action(self, widget):
         print('Button pressed')
