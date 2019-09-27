@@ -17,11 +17,11 @@ class Window(Gtk.Window):
         self.add(self.grid_layout)
 
         self.label = Gtk.Label(label=WAITING_UID_TEXT)
-        self.grid_layour.attach(self.label, 1, 1, 1, 1)
+        self.grid_layout.attach(self.label, 1, 1, 1, 1)
 
         self.button = Gtk.Button(label=CLEAR_BUTTON_TEXT)
         self.button .connect('clicked', self.button_action)
-        self.grid_layour.button(self.label, 1, 2, 1, 1)
+        self.grid_layout.button(self.label, 1, 2, 1, 1)
 
     def button_action(self, widget):
         print('Button pressed')
