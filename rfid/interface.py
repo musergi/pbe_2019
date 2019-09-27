@@ -17,6 +17,6 @@ class Window(Gtk.Window):
         print('Button pressed')
 
 if __name__ == '__main__':
-    window = Window(title="Hello World")
+    window = Window()
     window.show()
     Gtk.main()
