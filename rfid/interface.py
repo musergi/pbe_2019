@@ -17,6 +17,6 @@ class Window(Gtk.Window):
 
 if __name__ == '__main__':
     window = Window()
-    window.show()
+    window.show_all()
     window.connect("destroy", Gtk.main_quit)
     Gtk.main()
