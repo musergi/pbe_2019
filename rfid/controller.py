@@ -16,6 +16,7 @@ class Controller:
 
         # Start uid waiter
         self._uid_waiter = threading.Thread(target=self.set_uid, daemon=True)
+        self._uid_waiter.start()
 
     def clear_uid(self):
         print('[Controller] - Clearing uid')
@@ -30,5 +31,6 @@ class Controller:
 
         # Create another waiter before closing previous
         self._uid_waiter = threading.Thread(target=self.set_uid, daemon=True)
+        self._uid_waiter.start()
 
 
