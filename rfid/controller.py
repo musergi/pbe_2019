@@ -23,14 +23,17 @@ class Controller:
         with self._lock:
             self._window.set_label(WAITING_UID_TEXT)
 
+        # If there is not another waiter, create one
+        if self._uid_waiter is None:
+            self._uid_waiter = threading.Thread(target=self.set_uid, daemon=True)
+            self._uid_waiter.start()
+
     def set_uid(self):
         print('[Controller] - Setting uid')
         uid = self._rfid_reader.read_uid()
         with self._lock:
             self._window.set_label(READ_UID_TEXT.format(uid))
 
-        # Create another waiter before closing previous
-        self._uid_waiter = threading.Thread(target=self.set_uid, daemon=True)
-        self._uid_waiter.start()
+        self._uid_waiter = None
 
 

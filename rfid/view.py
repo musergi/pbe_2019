@@ -31,7 +31,10 @@ class Window(Gtk.Window):
 
         # Set-up controller
         self.ctl = Controller(self)
-        self.button.connect('clicked', self.ctl.clear_uid)
+        self.button.connect('clicked', self.button_action)
+
+    def button_action(self, widget):
+        self.ctl.clear_uid()
 
     def set_label(self, text):
         self.label.set_label(text)
