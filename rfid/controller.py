@@ -5,7 +5,7 @@ import threading
 from model import RfidReader_pn532_i2c
 
 WAITING_UID_TEXT = 'Insert card for uid display'
-READ_UID_TEXT = 'Read card with uid <b>{}</b>'
+READ_UID_TEXT = 'Read card with uid {}'
 
 
 class Controller:
