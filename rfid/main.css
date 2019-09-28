@@ -1,3 +1,6 @@
-* {
-    background-color: #00C;
+GtkLabel {
+    font-size: 20px;
+
+    background-color: #FFF;
+    padding: 2px;
 }
