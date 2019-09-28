@@ -22,7 +22,9 @@ class Window(Gtk.Window):
         self.style_manager = StyleManager()
 
         # Create grid layout
-        self.box_layout = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        self.box_layout = Gtk.Box(
+            orientation=Gtk.Orientation.VERTICAL,
+            spacing=10)
         self.add(self.box_layout)
 
         # Add label
