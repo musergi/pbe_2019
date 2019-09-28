@@ -17,6 +17,8 @@ class Window(Gtk.Window):
         Gtk.Window.__init__(self, title=WINDOW_CAPTION)
         self.connect("destroy", Gtk.main_quit)
 
+        self.style_manager = StyleManager()
+
         # Create grid layout
         self.grid_layout = Gtk.Grid()
         self.add(self.grid_layout)
@@ -27,17 +29,35 @@ class Window(Gtk.Window):
 
         # Add button
         self.button = Gtk.Button(label=CLEAR_BUTTON_TEXT)
+        self.button.connect('clicked', self.button_action)
         self.grid_layout.attach(self.button, 0, 1, 1, 1)
 
         # Set-up controller
         self.ctl = Controller(self)
-        self.button.connect('clicked', self.button_action)
 
     def button_action(self, widget):
         self.ctl.clear_uid()
 
     def set_label(self, text):
         self.label.set_label(text)
+
+
+
+class StyleManager:
+    def __init__(self):
+        css_string = ""
+
+        with open('main.css') as file:
+            css_string = file.read()
+
+        style_provider = Gtk.CssProvider()
+        style_provider.load_from_data(css_string)
+
+        Gtk.StyleContext.add_provider_for_screen(
+            Gdk.Screen.get_default(),
+            style_provider,
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+        )
 
 
 if __name__ == '__main__':
