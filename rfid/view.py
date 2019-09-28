@@ -25,7 +25,7 @@ class Window(Gtk.Window):
 
         # Add label
         self.label = Gtk.Label(label=WAITING_UID_TEXT)
-        self.label.set_class('main-label')
+        self.label.get_style_context().add_class('main-label')
         self.grid_layout.attach(self.label, 0, 0, 1, 1)
 
         # Add button
