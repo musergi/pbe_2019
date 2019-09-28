@@ -22,18 +22,18 @@ class Window(Gtk.Window):
         self.style_manager = StyleManager()
 
         # Create grid layout
-        self.grid_layout = Gtk.Grid(x_align=Gtk.Align.CENTER, v_align=Gtk.Align.CENTER)
-        self.add(self.grid_layout)
+        self.box_layout = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        self.add(self.box_layout)
 
         # Add label
         self.label = Gtk.Label(label=WAITING_UID_TEXT)
         self.label.get_style_context().add_class('main-label')
-        self.grid_layout.attach(self.label, 0, 0, 1, 1)
+        self.box_layout.add(self.label)
 
         # Add button
         self.button = Gtk.Button(label=CLEAR_BUTTON_TEXT)
         self.button.connect('clicked', self.button_action)
-        self.grid_layout.attach(self.button, 0, 1, 1, 1)
+        self.box_layout.add(self.button)
 
         # Set-up controller
         self.ctl = Controller(self)
