@@ -48,7 +48,7 @@ class StyleManager:
         css_string = ""
 
         with open('main.css') as file:
-            css_string = file.read()
+            css_string = file.read().encode('ascii', 'ignore')
 
         style_provider = Gtk.CssProvider()
         style_provider.load_from_data(css_string)
