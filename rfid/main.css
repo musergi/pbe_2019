@@ -1,9 +1,8 @@
 * {
-    font: Verdana 4px;
+    font: 24px Verdana;
+    background-color: #FFF;
 }
 
-GtkLabel {
-    font-size: 20px;
-
-    background-color: #00F;
+.main-label {
+    font-weight: 800;
 }
