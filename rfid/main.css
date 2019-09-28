@@ -1,3 +1,7 @@
+* {
+    font: Verdana 24px;
+}
+
 GtkLabel {
     font-size: 20px;
 
