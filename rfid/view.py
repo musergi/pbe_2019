@@ -36,7 +36,7 @@ class Window(Gtk.Window):
 
         # Add button
         self.button = Gtk.Button(label=CLEAR_BUTTON_TEXT)
-        self.button.connect('clicked', self.button_action)
+        self.button.connect('clicked', self.clear_uid)
         self.box_layout.add(self.button)
 
         # Set-up controller
