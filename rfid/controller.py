@@ -26,7 +26,7 @@ class Controller:
         uid = self._rfid_reader.read_uid()
         
         # Update ui with uid
-        self._window.set_uid(uid)
+        GLib.idle_add(self._window.set_uid, uid)
 
         # Remove thread reference
         self._uid_waiter = None
