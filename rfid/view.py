@@ -11,7 +11,7 @@ WINDOW_CAPTION = 'Rfid app'
 
 CLEAR_BUTTON_TEXT = 'Click to clear'
 WAITING_UID_TEXT = 'Insert card for uid display'
-READ_UID_TEXT = 'Read card with uid {}'
+READ_UID_TEXT = 'UID: {}'
 
 
 class Window(Gtk.Window):
