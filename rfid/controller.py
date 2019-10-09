@@ -1,6 +1,9 @@
 # System imports
 import threading
 
+import gi
+from gi.repository import GLib
+
 # Module imports
 from model import RfidReader_pn532_i2c
 
