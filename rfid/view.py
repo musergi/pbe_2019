@@ -1,7 +1,7 @@
 # Third party imports
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gdk
+from gi.repository import Gtk, Gdk, Glib
 
 # Module imports
 from controller import Controller
