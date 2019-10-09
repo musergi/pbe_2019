@@ -4,7 +4,7 @@ class RfidReader_pn532_i2c:
     def __init__(self):
         self._device = Mifare()
         self._device.SAMconfigure()
-        self._device.set_max_retries(MIFARE_WAIT_FOR_ENTRY)
+        #self._device.set_max_retries(MIFARE_WAIT_FOR_ENTRY)
 
     def read_uid(self):
         uid = self._device.scan_field()
