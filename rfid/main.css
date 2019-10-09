@@ -6,6 +6,7 @@
 .main-label {
     margin: 8px;
     margin-top: 32px;
+    border-radius: 5px;
 }
 
 .green-backgound {
