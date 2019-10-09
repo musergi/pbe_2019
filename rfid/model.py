@@ -8,7 +8,7 @@ class RfidReader_pn532_i2c:
 
     def read_uid(self):
         uid = self._device.scan_field()
-        if !uid:
+        if not uid:
             raise Exception('Failed to read uid')
         return ''.join('{:02X}'.format(byte) for byte in uid)
 
