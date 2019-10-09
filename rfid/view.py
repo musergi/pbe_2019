@@ -10,6 +10,8 @@ from controller import Controller, WAITING_UID_TEXT
 WINDOW_CAPTION = 'Rfid app'
 
 CLEAR_BUTTON_TEXT = 'Click to clear'
+WAITING_UID_TEXT = 'Insert card for uid display'
+READ_UID_TEXT = 'Read card with uid {}'
 
 
 class Window(Gtk.Window):
@@ -40,11 +42,28 @@ class Window(Gtk.Window):
         # Set-up controller
         self.ctl = Controller(self)
 
-    def button_action(self, widget):
-        self.ctl.clear_uid()
+    def clear_uid(self, widget):
+        # Start new waiter
+        self.controller.clear_uid()
 
-    def set_label(self, text):
-        self.label.set_label(text)
+        # Set appropiated text into the label
+        self.label.set_label(WAITING_UID_TEXT)
+
+        # Adjust style
+        style_context = self.label.get_style_context()
+        if style_context.has_class('green-background'):
+            style_context.remove_class('green-background')
+        style_context.set_class('red-background')
+
+    def set_uid(self, uid):
+        # Set appropiated text into the label
+        self.label.set_label(READ_UID_TEXT.format(uid))
+
+        # Adjust style
+        style_context = self.label.get_style_context()
+        if style_context.has_class('red-background'):
+            style_context.remove_class('red-background')
+        style_context.set_class('green-background')
 
 
 

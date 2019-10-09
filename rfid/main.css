@@ -8,6 +8,14 @@
     margin-top: 32px;
 }
 
+.green-backgound {
+    background-color: lightgreen;
+}
+
+.red-background {
+    background-color: red;
+}
+
 button {
     margin: 0px 32px;
 }
