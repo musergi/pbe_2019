@@ -1,13 +1,16 @@
-from py532lib.i2c import Pn532_i2c
+from py532lib.mifare import Mifare, MIFARE_SAFE_RETRIES
 
 class RfidReader_pn532_i2c:
     def __init__(self):
-        self.device = Pn532_i2c()
-        self.device.SAMconfigure()
+        self._device = Mifare()
+        self._device.SAMconfigure()
+        self._device..set_max_retries(MIFARE_SAFE_RETRIES)
 
     def read_uid(self):
-        card_data = self.device.read_mifare().get_data()
-        return ''.join('{:02X}'.format(byte) for byte in card_data[-4:])
+        uid = self._device.scan_field()
+        if !uid:
+            raise Exception('Failed to read uid')
+        return ''.join('{:02X}'.format(byte) for byte in uid)
 
 if __name__ == '__main__':
     rfid = RfidReader_pn532_i2c()
