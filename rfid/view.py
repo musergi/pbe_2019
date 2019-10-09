@@ -4,7 +4,7 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk
 
 # Module imports
-from controller import Controller, WAITING_UID_TEXT
+from controller import Controller
 
 # Constants
 WINDOW_CAPTION = 'Rfid app'
