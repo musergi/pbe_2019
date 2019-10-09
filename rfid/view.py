@@ -32,6 +32,7 @@ class Window(Gtk.Window):
         # Add label
         self.label = Gtk.Label(label=WAITING_UID_TEXT)
         self.label.get_style_context().add_class('main-label')
+        self.clear_uid()
         self.box_layout.add(self.label)
 
         # Add button
@@ -53,7 +54,7 @@ class Window(Gtk.Window):
         style_context = self.label.get_style_context()
         if style_context.has_class('green-background'):
             style_context.remove_class('green-background')
-        style_context.set_class('red-background')
+        style_context.add_class('red-background')
 
     def set_uid(self, uid):
         # Set appropiated text into the label
@@ -63,7 +64,7 @@ class Window(Gtk.Window):
         style_context = self.label.get_style_context()
         if style_context.has_class('red-background'):
             style_context.remove_class('red-background')
-        style_context.set_class('green-background')
+        style_context.add_class('green-background')
 
 
 
