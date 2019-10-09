@@ -44,7 +44,7 @@ class Window(Gtk.Window):
 
     def clear_uid(self, widget):
         # Start new waiter
-        self.controller.clear_uid()
+        self.ctl.clear_uid()
 
         # Set appropiated text into the label
         self.label.set_label(WAITING_UID_TEXT)
