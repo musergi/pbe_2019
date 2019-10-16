@@ -1,4 +1,4 @@
-from py532lib.mifare import Mifare, MIFARE_WAIT_FOR_ENTRY
+from py532lib.mifare import Mifare
 
 class RfidReader_pn532_i2c:
     def __init__(self):
