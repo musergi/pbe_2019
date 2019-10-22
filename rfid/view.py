@@ -65,7 +65,7 @@ class Window(Gtk.Window):
         style_context = self.label.get_style_context()
         if style_context.has_class('red-background'):
             style_context.remove_class('red-background')
-        style_context.add_class('green-background')
+        style_context.add_class('green-backgound')
 
 
 
