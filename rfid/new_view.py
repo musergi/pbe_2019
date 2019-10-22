@@ -19,7 +19,7 @@ class Window:
 
         self._style_manager = StyleManager()
 
-        self._container = Gtk.Box(orientation=Gtk.Orentation.VERTICAL, spacing=8)
+        self._container = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
         self._window.add(self._container)
 
         self._label = Gtk.Label(label=DEFAULT_LABEL_CONTENT)
