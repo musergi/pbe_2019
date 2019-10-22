@@ -13,7 +13,7 @@ DEFAULT_BUTTON_CONTENT = 'Clear'
 
 
 class Window:
-    def __init__(self)
+    def __init__(self):
         self._window = Gtk.Window(title=WINDOW_CAPTION)
         self._window.connect('destroy', Gtk.main_quit)
 
