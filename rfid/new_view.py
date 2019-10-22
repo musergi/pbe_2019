@@ -26,11 +26,11 @@ class Window:
         label_context = self._label.get_style_context()
         label_context.add_class('main-label')
         label_context.add_class('green-background')
-        self._container.pack_end(self._label, True, True, 0)
+        self._container.pack_start(self._label, True, True, 0)
 
         self._button = Gtk.Button(label=DEFAULT_BUTTON_CONTENT)
         self._button.connect('clicked', self.clear_uid)
-        self._container.pack_end(self._button, True, False, 0)
+        self._container.pack_start(self._button, True, False, 0)
 
         self._ctl = Controller(self)
 
