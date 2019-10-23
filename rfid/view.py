@@ -3,78 +3,75 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk
 
-# Module imports
 from controller import Controller
 
-# Constants
-WINDOW_CAPTION = 'Rfid app'
 
-CLEAR_BUTTON_TEXT = 'Click to clear'
-WAITING_UID_TEXT = 'Insert card for uid display'
-READ_UID_TEXT = 'UID: {}'
+WINDOW_CAPTION = 'rfid_gtk'
+DEFAULT_LABEL_CONTENT = 'Please login with your university card'
+UID_LABEL_CONTENT = 'UID: {}'
+DEFAULT_BUTTON_CONTENT = 'Clear'
 
 
-class Window(Gtk.Window):
+class Window:
+    """Class in charge of creating the graphical interface. Creates all the
+    necessary PyGObject widgets for our interface. It has the 2 methods used
+    for changing the main label between its 2 states."""
     def __init__(self):
-        Gtk.Window.__init__(self, title=WINDOW_CAPTION)
-        self.connect("destroy", Gtk.main_quit)
-        #self.set_geometry(400, 300)
-        self.set_resizable(False)
+        """Window constructor, in this method all the interface is build and
+        the main label set to it initial state."""
+        self._window = Gtk.Window(title=WINDOW_CAPTION)
+        self._window.connect('destroy', Gtk.main_quit)
 
-        self.style_manager = StyleManager()
+        self._style_manager = StyleManager()
 
-        # Create grid layout
-        self.box_layout = Gtk.Box(
-            orientation=Gtk.Orientation.VERTICAL,
-            spacing=10)
-        self.add(self.box_layout)
+        self._container = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+        self._window.add(self._container)
 
-        # Add label
-        self.label = Gtk.Label(label=WAITING_UID_TEXT)
-        context = self.label.get_style_context()
-        context.add_class('main-label')
-        context.add_class('red-background')
-        self.box_layout.add(self.label)
+        self._label = Gtk.Label(label=DEFAULT_LABEL_CONTENT)
+        label_context = self._label.get_style_context()
+        label_context.add_class('main-label')
+        label_context.add_class('green-background')
+        self._container.pack_start(self._label, True, True, 0)
 
-        # Add button
-        self.button = Gtk.Button(label=CLEAR_BUTTON_TEXT)
-        self.button.connect('clicked', self.clear_uid)
-        self.box_layout.add(self.button)
+        self._button = Gtk.Button(label=DEFAULT_BUTTON_CONTENT)
+        self._button.connect('clicked', self.clear_uid)
+        self._container.pack_start(self._button, True, False, 0)
 
-        # Set-up controller
-        self.ctl = Controller(self)
+        self._ctl = Controller(self)
+
+        self._window.show_all()
 
     def clear_uid(self, widget):
-        # Start new waiter
-        self.ctl.clear_uid()
+        """Sets the label content to its default and if changed returns to
+        the default styling."""
+        self._ctl.clear_uid()
+        self._label.set_label(DEFAULT_LABEL_CONTENT)
 
-        # Set appropiated text into the label
-        self.label.set_label(WAITING_UID_TEXT)
-
-        # Adjust style
-        style_context = self.label.get_style_context()
-        if style_context.has_class('green-background'):
-            style_context.remove_class('green-background')
-        style_context.add_class('red-background')
+        label_context = self._label.get_style_context()
+        if not label_context.has_class('green-background'):
+            label_context.remove_class('red-background')
+            label_context.add_class('green-background')
 
     def set_uid(self, uid):
-        # Set appropiated text into the label
-        self.label.set_label(READ_UID_TEXT.format(uid))
+        """Sets the uid display message to the specified and changes the
+        styling."""
+        self._label.set_label(UID_LABEL_CONTENT.format(uid))
 
-        # Adjust style
-        style_context = self.label.get_style_context()
-        if style_context.has_class('red-background'):
-            style_context.remove_class('red-background')
-        style_context.add_class('green-backgound')
+        label_context = self._label.get_style_context()
+        if not label_context.has_class('red-background'):
+            label_context.remove_class('green-background')
+            label_context.add_class('red-background')
 
 
 
 class StyleManager:
+    """Class in charge of creating the styling context and loading the
+    css styling from a file."""
     def __init__(self):
-        css_string = ""
+        css_string = ''
 
-        with open('main.css') as file:
-            css_string = file.read().encode('ascii', 'ignore')
+        with open('main.css', 'r') as f:
+            css_string = f.read().encode('ascii', 'ignore')
 
         style_provider = Gtk.CssProvider()
         style_provider.load_from_data(css_string)
@@ -87,6 +84,5 @@ class StyleManager:
 
 
 if __name__ == '__main__':
-    window = Window()
-    window.show_all()
+    win = Window()
     Gtk.main()
