@@ -16,10 +16,14 @@ The folder named **server** contains all the source code used by the server side
 
 ## Work split
 
+Server side:
+
 - Server managment:
 - Main server programming:
 - Python interface server programming:
 - Database interface server programming:
+
+Client side:
 
 - Client controller programming:
 - Client interface programming:
