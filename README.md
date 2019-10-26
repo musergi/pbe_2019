@@ -29,3 +29,6 @@ Client side:
 - Client interface programming:
 - Client rfid model programming:
 - Client to server communication programming:
+
+General:
+- Code review and merge: Sergi Mus
