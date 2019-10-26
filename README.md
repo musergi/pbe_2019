@@ -31,4 +31,5 @@ Client side:
 - Client to server communication programming:
 
 General:
+
 - Code review and merge: Sergi Mus
