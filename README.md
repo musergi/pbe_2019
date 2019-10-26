@@ -14,7 +14,7 @@ The folder named **server** contains all the source code used by the server side
 - Python interfacing php module
 - MySQL database
 
-## Work split
+## Work split
 
 - Server managment:
 - Main server programming:
