@@ -18,17 +18,17 @@ The folder named **server** contains all the source code used by the server side
 
 Server side:
 
-- Server managment:
-- Main server programming:
-- Python interface server programming:
-- Database interface server programming:
+- Server managment: Sergi Mus
+- Main server programming: Sergi Mus
+- Python interface server programming: Alicia
+- Database interface server programming: Alicia
 
 Client side:
 
-- Client controller programming:
-- Client interface programming:
-- Client rfid model programming:
-- Client to server communication programming:
+- Client controller programming: Gonzalo
+- Client interface programming: Gonzalo
+- Client rfid model programming: Norma
+- Client to server communication programming: Norma
 
 General:
 
