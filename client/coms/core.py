@@ -1,14 +1,11 @@
-#Librerias que tengo que importar
-#http get requests
-#httplib / urllib (estándares de python) / requests
-import urllib.request
+""" Imported libraries
+    this one uses python's standards """
 
+import urllib.request
+""" Encapsulates communication functions"""
 class CommunicationManager:
     """
-    La clase lo que hace es encapsular (contenedor) funciones de comunicaciones
-    Función: Le paso una URL me conecto a una URL y devuelvo los datos 
-    (paquetes http y extraer los datos) de esa URL 
-    (Acceder a una web es algo que se hace muchas veces seguro que python tienen una libreria para eso)
+    Given a URL, connect to that URL and extract the data from the package
     """
     def get(self, url):
         response = urllib.request.urlopen(url)
