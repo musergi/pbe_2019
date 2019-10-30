@@ -1,7 +1,7 @@
-import gi, time
+import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk
-from client_controller import client_controller
+from controller import Controller
 
 
 class MainWindow(Gtk.Window):
@@ -12,6 +12,8 @@ class MainWindow(Gtk.Window):
         self.set_default_size(500, 100)
         self.set_name("main_window")
 
+        self.ctl = Controller(self)
+
         #create box
 
         hbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing = 10)
@@ -20,7 +22,7 @@ class MainWindow(Gtk.Window):
 
         #text view
         
-        self.text = Gtk.TextView()
+        self.text = Gtk.Label()
         self.text.set_property("width-request", 180)
         self.text.set_property("height-request", 180)
         self.text.set_justification(Gtk.Justification.FILL)
@@ -30,21 +32,23 @@ class MainWindow(Gtk.Window):
 
         #add text
 
-         hbox.pack_start(self.text, True, True, 0)
+        hbox.pack_start(self.text, True, True, 0)
 
         #action button
 
-        self.display_button = Gtk.Button(label="Action")
+        self.display_button = Gtk.Button(label="Request")
         self.display_button.set_property("width-request", 30)
         self.display_button.set_property("height-request", 10)
-        self.display_button.connect("clicked", self.display)
+        self.display_button.connect("clicked", self.ctl.get_message)
         self.display_button.set_name("action_button")
 
         #add action button to box
 
         hbox.pack_start(self.action_button, True, True, 0)
-        self.cc = client_controller()
         
+        self.connect("delete-event", Gtk.main_quit)
+        self.show_all()
+        Gtk.main()
 
 
         
