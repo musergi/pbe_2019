@@ -1,0 +1,33 @@
+CREATE TABLE students (
+	id int NOT NULL AUTO_INCREMENT,
+	name varchar(255) NOT NULL,
+	surname varchar(255) NOT NULL,
+	uid varchar(8) NOT NULL,
+	PRIMARY KEY (id));
+
+CREATE TABLE tasks (
+	id int NOT NULL AUTO_INCREMENT,
+	date DATE NOT NULL,
+	subject varchar(255) NOT NULL,
+	name varchar(255) NOT NULL,
+	PRIMARY KEY (id));
+
+CREATE TABLE marks (
+	id int NOT NULL AUTO_INCREMENT,
+	student int NOT NULL,
+	mark FLOAT(4,  2) NOT NULL,
+	subject varchar(255) NOT NULL,
+	name varchar(255) NOT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY (student) REFERENCES students(id));
+
+CREATE TABLE timetables (
+	id int NOT NULL AUTO_INCREMENT,
+	day int NOT NULL,
+	hour TIME NOT NULL,
+	subject varchar(255) NOT NULL,
+	room varchar(255) NOT NULL,
+	PRIMARY KEY (id));
+
+INSERT INTO students (uid, name, surname)
+    VALUES ('87A6B811', 'Tomas', 'Turbado');
