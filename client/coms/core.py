@@ -14,5 +14,5 @@ class CommunicationManager:
 
 if __name__ == "__main__":
     cm = CommunicationManager()
-    data = cm.get("http://10.0.30.203:8000")
+    data = cm.get("http://10.0.30.203:8000/python/connect_server.php")
     print(data)
