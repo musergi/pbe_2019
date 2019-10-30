@@ -10,5 +10,5 @@ class Controller:
 
     def get_message(self, widget):
         result = self.cm.get(URL)
-        self.interface.text.text = result
+        self.interface.text.set_label(result)
     
