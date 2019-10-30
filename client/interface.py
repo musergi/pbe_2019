@@ -22,12 +22,7 @@ class MainWindow(Gtk.Window):
 
         #text view
         
-        self.text = Gtk.Label()
-        self.text.set_property("width-request", 180)
-        self.text.set_property("height-request", 180)
-        self.text.set_justification(Gtk.Justification.FILL)
-        self.text.set_wrap_mode(True)
-        self.text.set_monospace(True)
+        self.text = Gtk.Label(label="Default label")
         self.text.set_name("text_style")
 
         #add text
