@@ -39,7 +39,7 @@ class MainWindow(Gtk.Window):
 
         #add action button to box
 
-        hbox.pack_start(self.action_button, True, True, 0)
+        hbox.pack_start(self.display_button, True, True, 0)
         
         self.connect("delete-event", Gtk.main_quit)
         self.show_all()
