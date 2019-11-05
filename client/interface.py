@@ -20,35 +20,37 @@ class MainWindow(Gtk.Window):
         hbox.set_homogeneous(False)
         self.add(hbox)
 
-        #text view
+        #label
         
-        self.text = Gtk.Label(label="Default label")
-        self.text.set_name("text_style")
+        self.label = Gtk.Label(label="Default label")
+        self.label.set_property("width-request", 180)
+        self.label.set_property("height-request", 180)
+        self.label.set_name("label_style")
 
-        #add text
+        #add label
 
-        hbox.pack_start(self.text, True, True, 0)
+        hbox.pack_start(self.label, True, True, 0)
 
         #action button
 
-        self.display_button = Gtk.Button(label="Request")
-        self.display_button.set_property("width-request", 30)
-        self.display_button.set_property("height-request", 10)
-        self.display_button.connect("clicked", self.ctl.get_message)
-        self.display_button.set_name("action_button")
+        self.action_button = Gtk.Button(label="Request")
+        self.action_button.set_property("width-request", 30)
+        self.action_button.set_property("height-request", 10)
+        self.action_button.connect("clicked", self.ctl.get_message)
+        self.action_button.set_name("action_button")
 
         #add action button to box
 
-        hbox.pack_start(self.display_button, True, True, 0)
+        hbox.pack_start(self.action_button, True, True, 0)
         
-        self.connect("delete-event", Gtk.main_quit)
+       
         self.show_all()
         Gtk.main()
 
 
         
 
-    # def display(self, widget):
+    # def action(self, widget):
     #     LcdObject = I2C_LCD_driver.lcd()
     #     LcdObject.lcd_clear()
     #     buffer = self.texting.get_buffer()
@@ -63,7 +65,7 @@ def main():
     def gtk_style():
 
         data = ''
-        with open('client.css') as f:
+        with open('client_interface.css') as f:
             data = f.read().encode('ascii', 'ignore')
         style_provider = Gtk.CssProvider()
         style_provider.load_from_data(data)
