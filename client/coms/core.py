@@ -23,13 +23,13 @@ class CommunicationManager:
             return None
         return student.read()
 
-    def get_query(self, student, table):
+    def get_query(self, student, table_name):
         """Get request with the student id for authentication
         Send table name and save the information 
         Returns (table): table is a .csv with all the table's info provided by the server"""
-        data = urllib.parse.urlencode(table)
+        data = urllib.parse.urlencode(table_name)
         request = urllib.request.Request(student.get_uid(), data)
-        self.table = urllib.request.urlopen(request)
+        table = urllib.request.urlopen(request)
         return table.read()
 
 
