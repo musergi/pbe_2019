@@ -44,8 +44,6 @@ class MainWindow(Gtk.Window):
         self.connect("delete-event", Gtk.main_quit)
         self.show_all()
         Gtk.main()
-
-
         
 
     # def display(self, widget):

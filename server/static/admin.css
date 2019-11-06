@@ -1,0 +1,91 @@
+html, body {
+    margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+header {
+    position: relative;
+}
+
+.main-title {
+    text-align: center;
+
+    color: white;
+    background-color: darkslategrey;
+    border-color: black;
+    border-top-style: solid;
+    border-bottom-style: solid;
+
+    padding: 0.5em;
+    border-width: 2px;
+    margin: 0;
+}
+
+.logout {
+    position: absolute;
+    right: 2em;
+    top: 50%;
+    transform: translate(0, -50%);
+
+    color: white;
+    text-decoration: none;
+}
+
+.logout:hover {
+    text-decoration: underline;
+}
+
+.container {
+    margin-right: 2em;
+    margin-left: 2em;
+}
+
+.table-list {
+    background-color: darkslategrey;
+    padding: 0;
+    border: 2px black solid;
+    border-radius: 15px;
+    margin: 0;
+    overflow: hidden;
+}
+
+.table-list a li {
+    list-style-type: none;
+    padding: 0.7em 2em;
+}
+
+.table-list a li:hover {
+    background-color: cadetblue;
+}
+
+.table-list a {
+    text-decoration: none;
+    color: white;
+}
+
+.login-container {
+    color: white;
+    background-color: darkslategrey;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 1em 3em;
+    border-radius: 15px;
+    display: inline-block;
+}
+
+.login-form input {
+    margin-top: 0.5em;
+}
+
+.query-table {
+    text-align: center;
+    margin-top: 32px;
+}
+
+.db-form {
+    margin-left: 2em;
+    margin-top: 1em;
+}

@@ -31,3 +31,10 @@ CREATE TABLE timetables (
 
 INSERT INTO students (uid, name, surname)
     VALUES ('87A6B811', 'Tomas', 'Turbado');
+
+CREATE TABLE admins (
+	id int NOT NULL AUTO_INCREMENT,
+	username varchar(255) NOT NULL,
+	email varchar(255),
+	password varchar(255) NOT NULL,
+	PRIMARY KEY (id));

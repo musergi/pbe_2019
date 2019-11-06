@@ -1,5 +1,14 @@
 from py532lib.mifare import Mifare
 
+class RfidReader:
+    def __init__(self):
+        """Polls for rfid readers until one is found and it performs
+        the adapting work."""
+        raise Exception('Not implemented')
+
+
+# Add all other rfid readers
+
 
 class RfidReader_pn532_i2c:
     def __init__(self):
