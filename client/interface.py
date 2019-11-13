@@ -1,85 +1,92 @@
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gdk
+from gi.repository import Gtk, GLib, Gdk
+
 from controller import Controller
 
-
-class MainWindow(Gtk.Window):
-
+class Interface:
     def __init__(self):
-        Gtk.Window.__init__(self, title="Client")
-        self.set_border_width(6)
-        self.set_default_size(500, 100)
-        self.set_name("main_window")
+        self._root = Gtk.Window(title='Minerva')
+        self._root.connect('destroy', Gtk.main_quit)
+        StyleManager.load_styles('main.css')
 
-        self.ctl = Controller(self)
+        self._container = Gtk.Box()
+        StyleManager.add_class(self._container, 'main-container')
+        self._root.add(self._container)
 
-        #create box
+        self._frames = {
+            'login': FrameLogin(self),
+            'table': FrameTable(self)
+        }
+        self._current_frame = None
+        self.select_frame('login')
 
-        hbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing = 10)
-        hbox.set_homogeneous(False)
-        self.add(hbox)
+        self._controller = Controller(self) # Init controller
 
-        #label
-        
-        self.label = Gtk.Label(label="Default label")
-        self.label.set_property("width-request", 180)
-        self.label.set_property("height-request", 180)
-        self.label.set_name("label_style")
+        self._root.show_all()
 
-        #add label
+    def select_frame(self, frame_name):
+        if self._current_frame is not None:
+            self._container.remove(self._current_frame)
+        self._current_frame = self._frames[frame_name]
+        self._container.add(self._current_frame)
+        self._root.show_all()
 
-        hbox.pack_start(self.label, True, True, 0)
+    def request_frame(self, frame_name):
+        GLib.idle_add(self.select_frame, frame_name)
 
-        #action button
-
-        self.action_button = Gtk.Button(label="Request")
-        self.action_button.set_property("width-request", 30)
-        self.action_button.set_property("height-request", 10)
-        self.action_button.connect("clicked", self.ctl.get_message)
-        self.action_button.set_name("action_button")
-
-        #add action button to box
-
-        hbox.pack_start(self.action_button, True, True, 0)
-        
-       
-        self.show_all()
+    def mainloop(self):
         Gtk.main()
-        
 
-    # def action(self, widget):
-    #     LcdObject = I2C_LCD_driver.lcd()
-    #     LcdObject.lcd_clear()
-    #     buffer = self.texting.get_buffer()
-    #     start_it = buffer.get_start_iter()
-    #     end_it = buffer.get_end_iter()
-    #     string = buffer.get_text(start_it, end_it, False)
-    #     self.lcd.write_lines(string.split('\n'))
-    #     time.sleep(1)
-    #     buffer.delete(start_it, end_it)
 
-def main():
-    def gtk_style():
+class StyleManager:
+    @staticmethod
+    def load_styles(source_filepath):
+        css_data = ''
 
-        data = ''
-        with open('client_interface.css') as f:
-            data = f.read().encode('ascii', 'ignore')
+        with open(source_filepath, 'r') as f:
+            css_data = f.read().encode('ascii', 'ignore')
+
         style_provider = Gtk.CssProvider()
-        style_provider.load_from_data(data)
+        style_provider.load_from_data(css_data)
 
         Gtk.StyleContext.add_provider_for_screen(
             Gdk.Screen.get_default(),
             style_provider,
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
         )
+    
+    @staticmethod
+    def add_class(widget, class_name):
+        context = widget.get_style_context()
+        context.add_class(class_name)
 
-    gtk_style()
-    win = MainWindow()
-    win.connect("delete-event", Gtk.main_quit)
-    win.show_all()
-    Gtk.main()
 
-if __name__ == "__main__":
-    main()
+class FrameLogin(Gtk.Box):
+    def __init__(self, parent):
+        Gtk.Box.__init__(self)
+        self._parent = parent
 
+        self._label = Gtk.Label(label='Enter university card to login')
+        self.add(self._label)
+
+        button = Gtk.Button(label='login')
+        button.connect('clicked', lambda widget: self._parent.select_frame('table'))
+        self.add(button)
+
+
+class FrameTable(Gtk.Box):
+    def __init__(self, parent):
+        Gtk.Box.__init__(self, orientation=Gtk.Orientation.VERTICAL)
+        self._parent = parent
+        
+        self._label = Gtk.Label(label='Querry')
+        self.add(self._label)
+
+        self._entry = Gtk.Entry()
+        self.add(self._entry)
+
+
+if __name__ == '__main__':
+    interface = Interface()
+    interface.mainloop()
