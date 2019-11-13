@@ -47,7 +47,7 @@ switch($table_name){
         break;
 }
 
-mysqli_close($conn);
+mysqli_close($connection);
 
 
 ?>
