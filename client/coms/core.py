@@ -4,7 +4,7 @@ import csv
 from io import StringIO
 
 #Useful information: https://docs.python.org/3.1/howto/urllib2.html
-url ='http://10.0.30.203:8000/python/' 
+url ='http://127.0.0.1:8000/python/' 
 
 class CommunicationManager:
 
@@ -21,19 +21,19 @@ class CommunicationManager:
         with the id, name, surname and uid stored in it.
         Returns (Student): Student created from the info provided by the server."""
         values = {
-            'uid' : uid }
+            'uid' : uid
+        }
 
-        url_student = url + 'request_id.php'
         data = urllib.parse.urlencode(values)
-        request = urllib.request.Request(url_student, data)
-        response = urllib.request.urlopen(request)
+        url_student = url + 'request_id.php?' + data
+        """
         if (response.get_header() == "Error404"):
             return None
-        response_csv = response.read().decode()
+        """
+        response_csv = self.get(url_student)
         readCSV = csv.DictReader(StringIO(response_csv), delimiter=',')
-
         student_info = next(readCSV)
-        student = Student(student_info['card_uid'], student_info['name'], student_info['surname'], student_info['id'])
+        student = Student(student_info['id'], student_info['name'], student_info['surname'], student_info['uid'])
         return student
         
 
@@ -75,10 +75,10 @@ class Student:
 
     def __str__(self):
         """String representation of the class."""
-        raise Exception('Not implemented')
+        return f'({self._id},{self._name} {self._surname},{self._uid})'
 
 
 if __name__ == "__main__":
     cm = CommunicationManager()
-    data = cm.get("http://10.0.30.203:8000/python/connect_server.php")
+    data = cm.get_student('87A6B811')
     print(data)

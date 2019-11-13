@@ -9,9 +9,9 @@ $result = mysqli_query($connection, $sql);
 
 //If exits return al the data, else ERROR
 if(mysqli_num_rows($result) > 0){
-    echo "id,name,surname,uid<br>";
+    echo "id,name,surname,uid\n";
     $row = mysqli_fetch_assoc($result);
-    echo $row["id"].",".$row["name"].",".$row["surname"].",".$row["uid"]."<br>";
+    echo $row["id"].",".$row["name"].",".$row["surname"].",".$row["uid"]."\n";
 }else{
     header("HHTP/1.0 404 Not Found");
 }

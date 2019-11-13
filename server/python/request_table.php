@@ -26,7 +26,7 @@ switch($table_name){
             while($row = $result->fetch_assoc()){
                 echo $row["subject"].",".$row["name"].",".$row["mark"]."<br>";
             }
-        }else{
+        } else {
             header("HHTP/1.0 404 Not Found");
         }
         break;
