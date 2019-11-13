@@ -21,6 +21,7 @@ class CommunicationManager:
         If the response is 404 return None otherwise return a Student object
         with the id, name, surname and uid stored in it.
         Returns (Student): Student created from the info provided by the server."""
+<<<<<<< HEAD
         values = {
             'uid' : uid
         }
@@ -48,6 +49,26 @@ class CommunicationManager:
             'student_id' : student.get_id(),
             'table_name' : table_name,
             **params}
+=======
+
+        request_response = urllib.request.Request(uid)
+
+        if request_response.get_header == "HTTP/1.0 404 Not Found":
+            return None
+           
+        elif Student.uid == uid:
+            return Student
+
+        raise Exception('Not implemented')
+
+    def get_query(self, student, table):
+        """Get request with the student id for authentication"""
+        
+        query = self.student.get_id
+        
+
+        raise Exception('Not implemented')
+>>>>>>> From Client, Controller + Core  changes
 
         data = urllib.parse.urlencode(values)
         url_query = url + 'request_table.php' + data
@@ -64,6 +85,7 @@ class Student:
         self._surname = surname
         self._uid = uid
 
+<<<<<<< HEAD
     #TODO: Getters
     def get_id(self):
         return self._id
@@ -71,15 +93,33 @@ class Student:
     def get_name(self):
         return self._name
     
+=======
+    def get_id(self):
+        return self._id
+
+    def get_name(self):
+        return self._name
+
+>>>>>>> From Client, Controller + Core  changes
     def get_surname(self):
         return self._surname
 
     def get_uid(self):
         return self._uid
+<<<<<<< HEAD
 
     def __str__(self):
         """String representation of the class."""
         return f'({self._id},{self._name} {self._surname},{self._uid})'
+=======
+
+
+    def __str__(self):
+        """String representation of the class."""
+
+        return 'u_id, name, surname, uid'   # o hacer con gets? toString
+        
+>>>>>>> From Client, Controller + Core  changes
 
 
 if __name__ == "__main__":
