@@ -1,5 +1,7 @@
 from py532lib.mifare import Mifare
 from pynfc import Nfc, Timeout
+import RPi.GPIO as GPIO
+from mfrc522 import SimpleMFRC522
 
 class RfidReader:
     def __init__(self):
@@ -8,7 +10,7 @@ class RfidReader:
 
         self._reader = None
         
-        for rfid_reader in  [RfidElechousePN532, RfidReader_pn532_i2c]:
+        for rfid_reader in  [RfidElechousePN532, RfidReader_pn532_i2c, RfidReader_MFRC_RC522]:
             
             try: 
                 self._reader = rfid_reader()
@@ -18,7 +20,7 @@ class RfidReader:
 
         if self._reader is None:
             raise IOError("Rfid not found")
-        
+
 # Add all other rfid readers
 
 class RfidElechousePN532:
@@ -43,3 +45,10 @@ class RfidReader_pn532_i2c:
         uid = self._device.scan_field()
         return ''.join('{:02X}'.format(byte) for byte in uid)
 
+class RfidReader_MFRC_RC522:
+    def __init__(self):
+        self._reader = SimpleMFRC522()
+
+    def read_uid(self):
+        id = self._reader.read_id();
+        return '%X' % id
