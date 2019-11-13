@@ -16,10 +16,23 @@ class CommunicationManager:
         If the response is 404 return None otherwise return a Student object
         with the id, name, surname and uid stored in it.
         Returns (Student): Student created from the info provided by the server."""
+
+        request_response = urllib.request.Request(uid)
+
+        if request_response.get_header == "HTTP/1.0 404 Not Found":
+            return None
+           
+        elif Student.uid == uid:
+            return Student
+
         raise Exception('Not implemented')
 
     def get_query(self, student, table):
         """Get request with the student id for authentication"""
+        
+        query = self.student.get_id
+        
+
         raise Exception('Not implemented')
 
 
@@ -31,11 +44,24 @@ class Student:
         self._surname = surname
         self._uid = uid
 
-    #TODO: Getters
+    def get_id(self):
+        return self._id
+
+    def get_name(self):
+        return self._name
+
+    def get_surname(self):
+        return self._surname
+
+    def get_uid(self):
+        return self._uid
+
 
     def __str__(self):
         """String representation of the class."""
-        raise Exception('Not implemented')
+
+        return 'u_id, name, surname, uid'   # o hacer con gets? toString
+        
 
 
 if __name__ == "__main__":
