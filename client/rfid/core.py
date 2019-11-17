@@ -10,16 +10,19 @@ class RfidReader:
 
         self._reader = None
         
-        for rfid_reader in  [RfidElechousePN532, RfidReader_pn532_i2c, RfidReader_MFRC_RC522]:
+        for rfid_reader in  [RfidElechousePN532, RfidReader_MFRC_RC522, RfidReader_pn532_i2c]:
             
             try: 
                 self._reader = rfid_reader()
                 break
-            except IOError: 
+            except Exception: 
                 print("Failed to open Rfid")
 
         if self._reader is None:
             raise IOError("Rfid not found")
+
+    def read_uid(self):
+        return self._reader.read_uid()
 
 # Add all other rfid readers
 
@@ -52,3 +55,9 @@ class RfidReader_MFRC_RC522:
     def read_uid(self):
         id = self._reader.read_id();
         return '%X' % id
+
+
+if __name__ == "__main__":
+    rfid = RfidReader()
+    data = rfid.read_uid()
+    print(data)
