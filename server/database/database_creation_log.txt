@@ -38,3 +38,51 @@ CREATE TABLE admins (
 	email varchar(255),
 	password varchar(255) NOT NULL,
 	PRIMARY KEY (id));
+
+INSERT INTO timetables (day, hour, subject, room)
+	VALUES (1, '08:00:00', 'DSBM', 'A4105');
+	VALUES (1, '10:00:00', 'RP', 'A4105');
+	VALUES (1, '12:00:00', 'LAB_DSBM', 'C5S101A');
+	VALUES (2, '08:00:00', 'TD', 'A4105');
+	VALUES (2, '11:00:00', 'PSAVC', 'A4105');
+	VALUES (2, '12:00:00', 'LAB_RP', 'D3006');
+	VALUES (3, '15:00:00', 'LAB_PBE', 'C3S103');
+	VALUES (4, '08:00:00', 'PBE', 'A3001');
+	VALUES (4, '10:00:00', 'PSAVC', 'A4105');
+	VALUES (4, '12:00:00', 'RP', 'A4105');
+	VALUES (5, '08:00:00', 'PSAVC', 'A4105');
+	VALUES (5, '10:00:00', 'DSBM', 'A4105');
+	VALUES (5, '11:00:00', 'TD', 'A4105');
+
+INSERT INTO tasks (date, subject, name)
+	VALUES ('2019-11-06', 'PSAVC', 'Parcial');
+	VALUES ('2019-11-08', 'DSBM', 'Microtaska 5');
+	VALUES ('2019-11-08', 'TD', 'Exercici 3');
+	VALUES ('2019-12-04', 'TD', 'Parcial');
+	VALUES ('2019-12-06', 'DSBM', 'Memoria R2');
+	VALUES ('2019-12-13', 'RP', 'Control 4');
+	VALUES ('2019-12-16', 'DSBM', 'Previo C3');
+	VALUES ('2019-12-07', 'RP', 'Practica 5');
+
+INSERT INTO marks (student, mark, subject, name)
+	VALUES (4, 8.7, 'PSAVC', 'Parcial');
+	VALUES (4, 7, 'DSBM', 'Parcial');
+	VALUES (4, 8.8, 'RP', 'Parcial');
+	VALUES (4, 9.5, 'PSAVC', 'Practica');
+	VALUES (4, 9, 'DSBM', 'Practica');
+	VALUES (4, 9.4, 'RP', 'Practica');
+	VALUES (4, 9.7, 'PBE', 'Projecte ICT');
+	VALUES (4, 10, 'PBE', 'Puzzle 1');
+
+
+
+
+
+
+
+	
+
+
+
+
+
