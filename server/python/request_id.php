@@ -13,7 +13,7 @@ if(mysqli_num_rows($result) > 0){
     $row = mysqli_fetch_assoc($result);
     echo $row["id"].",".$row["name"].",".$row["surname"].",".$row["uid"]."\n";
 }else{
-    header("HHTP/1.0 404 Not Found");
+    header("HTTP/1.0 404 Not Found");
 }
 
 
