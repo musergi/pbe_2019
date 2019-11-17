@@ -15,7 +15,7 @@ class RfidReader:
             try: 
                 self._reader = rfid_reader()
                 break
-            except IOError: 
+            except Exception: 
                 print("Failed to open Rfid")
 
         if self._reader is None:
