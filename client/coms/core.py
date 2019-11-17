@@ -1,10 +1,11 @@
 # Default Python imports
 import urllib.request # Encapsulates communication functions
+from urllib.error import HTTPError
 import csv
 from io import StringIO
 
 #Useful information: https://docs.python.org/3.1/howto/urllib2.html
-url ='http://127.0.0.1:8000/python/' 
+url ='http://192.168.1.55:8000/python/' 
 
 class CommunicationManager:
 
@@ -26,11 +27,13 @@ class CommunicationManager:
 
         data = urllib.parse.urlencode(values)
         url_student = url + 'request_id.php?' + data
-        """
-        if (response.get_header() == "Error404"):
-            return None
-        """
-        response_csv = self.get(url_student)
+        response_csv = ''
+        try:
+            response_csv = self.get(url_student)
+        except HTTPError as e: 
+            if '404' in str(e):
+                print ("Not found")
+                return None
         readCSV = csv.DictReader(StringIO(response_csv), delimiter=',')
         student_info = next(readCSV)
         student = Student(student_info['id'], student_info['name'], student_info['surname'], student_info['uid'])
@@ -45,11 +48,11 @@ class CommunicationManager:
             'student_id' : student.get_id(),
             'table_name' : table_name }
 
-        url_query = url + 'request_table.php'
         data = urllib.parse.urlencode(values)
-        request = urllib.request.Request(url_query, data)
-        table = urllib.request.urlopen(request)
-        return table.read()
+        url_query = url + 'request_table.php' + data
+        table = self.get(url_query)
+
+        return table
        
 
 class Student:
@@ -80,5 +83,5 @@ class Student:
 
 if __name__ == "__main__":
     cm = CommunicationManager()
-    data = cm.get_student('87A6B811')
+    data = cm.get_student('87A6B812')
     print(data)
