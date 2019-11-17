@@ -7,7 +7,7 @@ $table_name = $_GET["table_name"];
 
 switch($table_name){
     case 'tasks' :
-        $sql = 'SELECT date, subject, name FROM tasks;';
+        $sql = 'SELECT date, subject, name FROM tasks WHERE date="'.$_GET['date'].'";';
         $result = mysqli_query($connection, $sql);
         if(mysqli_num_rows($result)>0){
             echo "date,subject,name\n";
