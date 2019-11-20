@@ -48,6 +48,10 @@ class Interface:
     def request_frame(self, frame_name):
         GLib.idle_add(self.select_frame, frame_name)
 
+    def query(self):
+        querry_str = self._frames['table'].get_entry_text()
+        self._controller.request_query(querry_str)
+
     def mainloop(self):
         Gtk.main()
 
@@ -108,7 +112,14 @@ class FrameTable(Gtk.Box):
         self._entry = Gtk.Entry()
         self.add(self._entry)
 
+        self._button = Gtk.Button(label='Search')
+        self._button.connect('clicked', self._parent.query)
+        self.add(self._button)
+
         self._table = None
+
+    def get_entry_text(self):
+        return self._entry['text']
 
     def set_table(self, table):
         if self._table is not None:
