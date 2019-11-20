@@ -48,9 +48,9 @@ class Interface:
     def request_frame(self, frame_name):
         GLib.idle_add(self.select_frame, frame_name)
 
-    def query(self):
-        querry_str = self._frames['table'].get_entry_text()
-        self._controller.request_query(querry_str)
+    def query(self, widget):
+        query_str = self._frames['table'].get_entry_text()
+        self._controller.request_query(query_str)
 
     def mainloop(self):
         Gtk.main()
