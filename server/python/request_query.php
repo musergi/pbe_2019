@@ -23,6 +23,7 @@ $user_query = $user_query . $cols . ' FROM ' . $_GET["table_name"] .' ';
 // Where contraint
 $where_inserted = FALSE;
 foreach($_GET as $key => $value) {
+    echo $key . "," . $value . "\n";
     if ($key == 'table_name' || $key == 'limit' || $key == 'student_id') {
         continue;
     }
@@ -34,8 +35,8 @@ foreach($_GET as $key => $value) {
         $user_query = $user_query . ' AND ';
     }
 
-    $starting_pos = strpos($key, '[');
-    $ending_pos = strpos($key, ']');
+    $starting_pos = strpos($key, '(');
+    $ending_pos = strpos($key, ')');
     $restriction_type = substr($key, $starting_pos + 1, $ending_pos - $starting_pos - 2);
     $variable_name = $key;
     if ($starting_pos !== FALSE) {
@@ -83,7 +84,7 @@ if ($_GET['limit'] != null) {
 
 $user_query = $user_query . ';';
 
-echo $user_query . '<br>';
+echo $user_query . "\n";
 
 $result = mysqli_query($connection, $user_query);
 if(mysqli_num_rows($result)>0){

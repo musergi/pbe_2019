@@ -38,6 +38,7 @@ class Controller:
         logging.debug(f'Requesting table: {query_str}')
         table, param_dict = parse_query_str(query_str)
         csv_table = self._com_manager.get_query(self._student, table, param_dict)
+        logging.debug(f'Response table: \n{csv_table}')
         self._interface.request_table(csv_table)
 
     def get_message(self, widget):
@@ -49,6 +50,9 @@ def parse_query_str(string):
     if '?' not in string:
         return string, dict()
     
+    string.replace('[', '(')
+    string.replace(']', ')')
+
     table_name, params_str = string.split('?')
 
     params = dict()
