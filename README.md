@@ -6,7 +6,7 @@ There folder named **client** contains all the source code used by the client si
 
 - Rfid model
 - Application user interface
-- Server comunication module
+- Server communication module
 
 The folder named **server** contains all the source code used by the server side of out application. The contents of this folder are:
 
@@ -18,7 +18,7 @@ The folder named **server** contains all the source code used by the server side
 
 Server side:
 
-- Server managment: Sergi Mus
+- Server management: Sergi Mus
 - Main server programming: Sergi Mus
 - Python interface server programming: Alicia
 - Database interface server programming: Alicia
