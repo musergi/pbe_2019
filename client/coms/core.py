@@ -22,6 +22,7 @@ class CommunicationManager:
         with the id, name, surname and uid stored in it.
         Returns (Student): Student created from the info provided by the server."""
 <<<<<<< HEAD
+<<<<<<< HEAD
         values = {
             'uid' : uid
         }
@@ -50,6 +51,8 @@ class CommunicationManager:
             'table_name' : table_name,
             **params}
 =======
+=======
+>>>>>>> 565f6fba88125659deff7b049490bc0c6c0e76a5
 
         request_response = urllib.request.Request(uid)
 
@@ -86,6 +89,7 @@ class Student:
         self._uid = uid
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     #TODO: Getters
     def get_id(self):
         return self._id
@@ -94,18 +98,24 @@ class Student:
         return self._name
     
 =======
+=======
+>>>>>>> 565f6fba88125659deff7b049490bc0c6c0e76a5
     def get_id(self):
         return self._id
 
     def get_name(self):
         return self._name
 
+<<<<<<< HEAD
 >>>>>>> From Client, Controller + Core  changes
+=======
+>>>>>>> 565f6fba88125659deff7b049490bc0c6c0e76a5
     def get_surname(self):
         return self._surname
 
     def get_uid(self):
         return self._uid
+<<<<<<< HEAD
 <<<<<<< HEAD
 
     def __str__(self):
@@ -120,6 +130,15 @@ class Student:
         return 'u_id, name, surname, uid'   # o hacer con gets? toString
         
 >>>>>>> From Client, Controller + Core  changes
+=======
+
+
+    def __str__(self):
+        """String representation of the class."""
+
+        return 'u_id, name, surname, uid'   # o hacer con gets? toString
+        
+>>>>>>> 565f6fba88125659deff7b049490bc0c6c0e76a5
 
 
 if __name__ == "__main__":
