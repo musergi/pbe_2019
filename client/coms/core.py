@@ -53,7 +53,7 @@ class CommunicationManager:
             **params}
 
         data = urllib.parse.urlencode(values)
-        url_query = url + 'request_table.php' + data
+        url_query = url + 'request_table.php?' + data
         table = self.get(url_query)
 
         return table
