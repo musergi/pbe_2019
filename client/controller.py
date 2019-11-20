@@ -1,3 +1,5 @@
+import threading
+
 from coms.core import CommunicationManager
 
 URL = 'http://10.0.30.203:8000/python/connect_server.php'

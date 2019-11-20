@@ -32,6 +32,11 @@ class Interface:
         self._container.add(self._current_frame)
         self._root.show_all()
 
+    def set_table(self, csv):
+        table = TableRenderer.render_csv(csv)
+        self._frames['table'].set_table(table)
+        self._root.show_all()
+
     def request_frame(self, frame_name):
         GLib.idle_add(self.select_frame, frame_name)
 
@@ -62,6 +67,19 @@ class StyleManager:
         context.add_class(class_name)
 
 
+class TableRenderer:
+    @staticmethod
+    def render_csv(csv):
+        table = Gtk.Grid()
+
+        for num_row, row in enumerate(csv.split('\n')):
+            for num_col, col in enumerate(row.split(',')):
+                cell_label = Gtk.Label(label=col)
+                table.attach(cell_label, num_col, num_row, 1, 1)
+
+        return table
+
+
 class FrameLogin(Gtk.Box):
     def __init__(self, parent):
         Gtk.Box.__init__(self)
@@ -85,6 +103,14 @@ class FrameTable(Gtk.Box):
 
         self._entry = Gtk.Entry()
         self.add(self._entry)
+
+        self._table = None
+
+    def set_table(self, table):
+        if self._table is not None:
+            self.remove(self._table)
+        self._table = table
+        self.add(self._table)
 
 
 if __name__ == '__main__':

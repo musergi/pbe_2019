@@ -40,13 +40,14 @@ class CommunicationManager:
         return student
         
 
-    def get_query(self, student, table_name):
+    def get_query(self, student, table_name, params):
         """Get request with the student id for authentication
         Send table name and save the information 
         Returns (table): table is a .csv with all the table's info provided by the server"""
         values = {
             'student_id' : student.get_id(),
-            'table_name' : table_name }
+            'table_name' : table_name,
+            **params}
 
         data = urllib.parse.urlencode(values)
         url_query = url + 'request_table.php' + data
