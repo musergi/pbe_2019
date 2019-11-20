@@ -65,8 +65,6 @@ if ($_GET['limit'] != null) {
 
 $user_query = $user_query . ';';
 
-echo $user_query . '<br>';
-
 $result = mysqli_query($connection, $user_query);
 if(mysqli_num_rows($result)>0){
     echo $cols . '\n';
