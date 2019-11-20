@@ -37,7 +37,7 @@ class Controller:
     def _do_request(self, table):
         logging.debug(f'Requesting table: {table}')
         csv_table = self._com_manager.get_query(self._student, table, dict())
-        self._interface.request_table(table)
+        self._interface.request_table(csv_table)
 
     def get_message(self, widget):
         result = self._com_manager.get(URL)
