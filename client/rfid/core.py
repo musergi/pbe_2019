@@ -58,7 +58,7 @@ class RfidReader_MFRC_RC522:
 
     def read_uid(self):
         read_id = self._reader.read_id()
-        return ('%X' % read_id)[:9]
+        return ('%X' % read_id)[:8]
 
 
 if __name__ == "__main__":
