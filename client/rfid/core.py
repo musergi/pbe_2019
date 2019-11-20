@@ -12,7 +12,7 @@ class RfidReader:
 
         self._reader = None
         
-        for rfid_reader in  [RfidElechousePN532, RfidReader_MFRC_RC522, RfidReader_pn532_i2c]:
+        for rfid_reader in  [RfidReader_MFRC_RC522, RfidElechousePN532, RfidReader_pn532_i2c]:
             
             try: 
                 self._reader = rfid_reader()
