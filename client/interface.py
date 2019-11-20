@@ -129,6 +129,6 @@ class FrameTable(Gtk.Box):
 
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.DEBUG, format='%(relativeCreated)6d%(threadName)s%(message)s')
+    logging.basicConfig(level=logging.DEBUG, format='%(relativeCreated)6d %(threadName)s %(message)s')
     interface = Interface()
     interface.mainloop()
