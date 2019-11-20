@@ -119,7 +119,7 @@ class FrameTable(Gtk.Box):
         self._table = None
 
     def get_entry_text(self):
-        return self._entry['text']
+        return self._entry.get_text()
 
     def set_table(self, table):
         if self._table is not None:
