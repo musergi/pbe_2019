@@ -18,7 +18,7 @@ class Controller:
         """Waits for rfid card input and when a card is inputed
         sends a request asking for this student through the communication
         manager if the requests fails asks interface for an error screen"""
-        threading.Thread(target=self._login, daemon=True)
+        threading.Thread(target=self._login, daemon=True).start()
 
     def _login(self):
         while self._student is None:
@@ -32,12 +32,12 @@ class Controller:
         """From a string querry changes the display content to the querry
         result."""
         request_func = lambda: self._do_request(table)
-        threading.Thread(target=request_func, daemon=True)
+        threading.Thread(target=request_func, daemon=True).start()
 
     def _do_request(self, table):
         logging.debug(f'Requesting table: {table}')
         csv_table = self._com_manager.get_query(self._student, table, dict())
-        interface.request_table(table)
+        self._interface.request_table(table)
 
     def get_message(self, widget):
         result = self._com_manager.get(URL)
