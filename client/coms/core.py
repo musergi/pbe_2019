@@ -1,3 +1,5 @@
+import logging
+
 # Default Python imports
 import urllib.request # Encapsulates communication functions
 from urllib.error import HTTPError
@@ -12,6 +14,7 @@ class CommunicationManager:
     def get(self, url):
         """ Given a URL, connect to that URL and extract the data from the package 
         Returns (String): the data in utf-8"""
+        logging.debug(f'Requesting: {url}')
         response = urllib.request.urlopen(url)
         data = response.read()
         return data.decode("utf-8")

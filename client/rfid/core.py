@@ -1,3 +1,5 @@
+import logging
+
 from py532lib.mifare import Mifare
 from pynfc import Nfc, Timeout
 import RPi.GPIO as GPIO
@@ -20,8 +22,10 @@ class RfidReader:
 
         if self._reader is None:
             raise IOError("Rfid not found")
+        logging.debug('Created RFID reader')
 
     def read_uid(self):
+        logging.debug('Waiting for card')
         return self._reader.read_uid()
 
 # Add all other rfid readers

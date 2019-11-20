@@ -1,3 +1,5 @@
+import logging
+
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GLib, Gdk
@@ -24,6 +26,7 @@ class Interface:
         self._controller = Controller(self) # Init controller
 
         self._root.show_all()
+        logging.debug('Showing interface')
 
     def select_frame(self, frame_name):
         if self._current_frame is not None:
@@ -31,11 +34,13 @@ class Interface:
         self._current_frame = self._frames[frame_name]
         self._container.add(self._current_frame)
         self._root.show_all()
+        logging.debug(f'Selecting frame {frame_name}')
 
     def set_table(self, csv):
         table = TableRenderer.render_csv(csv)
         self._frames['table'].set_table(table)
         self._root.show_all()
+        logging.debug('Table set')
 
     def request_table(self, csv):
         GLib.idle_add(self.set_table, csv)
@@ -91,10 +96,6 @@ class FrameLogin(Gtk.Box):
         self._label = Gtk.Label(label='Enter university card to login')
         self.add(self._label)
 
-        button = Gtk.Button(label='login')
-        button.connect('clicked', lambda widget: self._parent.select_frame('table'))
-        self.add(button)
-
 
 class FrameTable(Gtk.Box):
     def __init__(self, parent):
@@ -117,5 +118,6 @@ class FrameTable(Gtk.Box):
 
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.DEBUG, format='%(relativeCreated)6d%(threadName)s%(message)s')
     interface = Interface()
     interface.mainloop()
