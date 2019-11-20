@@ -50,8 +50,7 @@ def parse_query_str(string):
     if '?' not in string:
         return string, dict()
     
-    string.replace('[', '(')
-    string.replace(']', ')')
+    string = string.replace('[', '(').replace(']', ')')
 
     table_name, params_str = string.split('?')
 
