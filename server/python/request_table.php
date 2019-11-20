@@ -29,19 +29,15 @@ switch($table_name){
         }
         break;
     case 'marks' :
-<<<<<<< HEAD
-        $sql = 'SELECT subject, name, mark FROM marks WHERE student="' .$_GET['student_id'].'";';
-=======
         $mark = $_GET['mark'];
         $subject = $_GET['subject'];
-        $sql = 'SELECT subject, name, mark FROM marks ORDER BY subject WHERE student="' .$_GET['id'].'";';
+        $sql = 'SELECT subject, name, mark FROM marks ORDER BY subject WHERE student="' .$_GET['student_id'].'";';
         if($mark == 5){
-            $sql = 'SELECT subject, name, mark FROM marks ORDER BY subject WHERE student="' .$_GET['id'].'", mark < "'.$_GET['mark'].'";';
+            $sql = 'SELECT subject, name, mark FROM marks ORDER BY subject WHERE student="' .$_GET['student_id'].'", mark < "'.$_GET['mark'].'";';
         }
         if($subject != null){
-            $sql = 'SELECT subject, name, mark FROM marks ORDER BY subject WHERE student="' .$_GET['id'].'", subject="'.$_GET['subject'].'";';
+            $sql = 'SELECT subject, name, mark FROM marks ORDER BY subject WHERE student="' .$_GET['student_id'].'", subject="'.$_GET['subject'].'";';
         }
->>>>>>> Alicia
         $result = mysqli_query($connection, $sql);
         if(mysqli_num_rows($result)>0){
             echo "subject,name,mark\n";
