@@ -37,6 +37,9 @@ class Interface:
         self._frames['table'].set_table(table)
         self._root.show_all()
 
+    def request_table(self, csv):
+        GLib.idle_add(self.set_table, csv)
+
     def request_frame(self, frame_name):
         GLib.idle_add(self.select_frame, frame_name)
 
