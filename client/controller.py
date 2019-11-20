@@ -28,15 +28,16 @@ class Controller:
         logging.debug('User logged in')
         self._interface.request_frame('table')
 
-    def request_query(self, table):
+    def request_query(self, query_str):
         """From a string querry changes the display content to the querry
         result."""
-        request_func = lambda: self._do_request(table)
+        request_func = lambda: self._do_request(query_str)
         threading.Thread(target=request_func, daemon=True).start()
 
-    def _do_request(self, table):
-        logging.debug(f'Requesting table: {table}')
-        csv_table = self._com_manager.get_query(self._student, table, dict())
+    def _do_request(self, query_str):
+        logging.debug(f'Requesting table: {query_str}')
+        table, param_dict = parse_query_str(query_str)
+        csv_table = self._com_manager.get_query(self._student, table, param_dict)
         self._interface.request_table(csv_table)
 
     def get_message(self, widget):
@@ -44,4 +45,15 @@ class Controller:
         self._interface.text.set_label(result)
 
 
+def parse_query_str(string):
+    if '?' not in string:
+        return string, dict()
     
+    table_name, params_str = string.split('?')
+
+    params = dict()
+    for param_str in params_str.split('&'):
+        param_name, param_value = param_str.split('=')
+        params[param_name] = param_value
+
+    return table_name, params
