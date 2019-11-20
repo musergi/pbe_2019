@@ -12,6 +12,7 @@ class Controller:
         self._com_manager = CommunicationManager()
         self._rfid_reader = RfidReader()
         self._student = None
+        self.wait_login()
 
     def wait_login(self):
         """Waits for rfid card input and when a card is inputed
