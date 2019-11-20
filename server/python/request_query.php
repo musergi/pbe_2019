@@ -17,31 +17,49 @@ if(mysqli_num_rows($result)>0){
     header("HHTP/1.0 404 Not Found");
 }
 
-$cols = implode(',', $fields);
+$cols = implode(",", $fields);
 $user_query = $user_query . $cols . ' FROM ' . $_GET["table_name"] .' ';
 
 // Where contraint
-switch($_GET["table_name"]) {
-    case 'timetables':
-        // TODO: 
-        break;
-    case 'marks':
-        $user_query = $user_query . 'WHERE student=' . $_GET['student_id'];
-        if($_GET['subject'] != null) {
-            $user_query = $user_query . ' AND subject="' . $_GET['subject'] . '"';
-        }
-        if($_GET['mark'] != null && $_GET['mark'] == 5) {
-            $user_query = $user_query . ' AND mark<5';
-        }
-        break; 
-    case 'tasks':
-        $user_query = $user_query . 'WHERE ';
-        if ($_GET['date'] != null) {
-            $user_query = $user_query . 'date="' . $_GET['date'] . '"';
-        } else {
-            $user_query = $user_query . 'date>NOW()';
-        }
-        break;
+$where_inserted = FALSE;
+foreach($_GET as $key => $value) {
+    if ($key == 'table_name' || $key == 'limit' || $key == 'student_id') {
+        continue;
+    }
+
+    if (!$where_inserted) {
+        $user_query = $user_query . ' WHERE ';
+        $where_inserted = TRUE;
+    } else {
+        $user_query = $user_query . ' AND ';
+    }
+
+    $starting_pos = strpos($key, '[');
+    $ending_pos = strpos($key, ']');
+    $restriction_type = substr($key, $starting_pos + 1, $ending_pos - $starting_pos - 2);
+    $variable_name = $key;
+    if ($starting_pos !== FALSE) {
+        $variable_name = substr($key, 0, $starting_pos);
+    }
+    echo $name_end;
+    $user_query = $user_query . $variable_name;
+    switch ($restriction_type) {
+        case 'gt':
+            $user_query = $user_query . '>';
+            break;
+        case 'gte':
+            $user_query = $user_query . '>=';
+            break;
+        case 'lt':
+            $user_query = $user_query . '<';
+            break;
+        case 'lte':
+            $user_query = $user_query . '<=';
+            break;
+        default:
+            $user_query = $user_query . '=';
+    }
+    $user_query = $user_query . $value;
 }
 
 // Ordering
@@ -65,15 +83,17 @@ if ($_GET['limit'] != null) {
 
 $user_query = $user_query . ';';
 
+echo $user_query . '<br>';
+
 $result = mysqli_query($connection, $user_query);
 if(mysqli_num_rows($result)>0){
-    echo $cols . '\n';
+    echo $cols . "\n";
     while($row = $result->fetch_assoc()){
         $data = array();
         foreach ($fields as $field) {
             array_push($data, $row[$field]);
         }
-        echo implode(',', $data) . '\n';
+        echo implode(",", $data) . "\n";
     }
 } else {
     header("HHTP/1.0 404 Not Found");

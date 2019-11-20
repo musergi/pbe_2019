@@ -54,6 +54,12 @@ def parse_query_str(string):
     params = dict()
     for param_str in params_str.split('&'):
         param_name, param_value = param_str.split('=')
-        params[param_name] = param_value
+        if is_number(param_value):
+            params[param_name] = param_value
+        else:
+            params[param_name] = '"' + param_value + '"' #Add double quotes
 
     return table_name, params
+
+def is_number(string):
+    return string.replace('.', '', 1).isdigit()

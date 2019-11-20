@@ -7,7 +7,7 @@ import csv
 from io import StringIO
 
 #Useful information: https://docs.python.org/3.1/howto/urllib2.html
-url ='http://10.0.30.203:8000/python/' 
+url ='http://192.168.1.134:8000/python/' 
 
 class CommunicationManager:
 
