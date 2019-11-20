@@ -19,7 +19,7 @@ switch($table_name){
         }
         break;
     case 'marks' :
-        $sql = 'SELECT subject, name, mark FROM marks WHERE student="' .$_GET['id'].'";';
+        $sql = 'SELECT subject, name, mark FROM marks WHERE student="' .$_GET['student_id'].'";';
         $result = mysqli_query($connection, $sql);
         if(mysqli_num_rows($result)>0){
             echo "subject,name,mark\n";
