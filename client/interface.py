@@ -158,7 +158,6 @@ class FrameTable(Gtk.Grid):
 
         self._label = Gtk.Label(label='Query')
         StyleManager.add_class(self._label, 'vertical-spacing')
-        StyleManager.add_class(self._label, 'query-title')
         self.attach(self._label, 0, 1, 1, 1)
 
         self._entry = Gtk.Entry()
