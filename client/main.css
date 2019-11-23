@@ -4,7 +4,7 @@ button {background-color: #87CEFA; margin: 0px 8px; border-radius: 5px;}
 
 .small-font {font-size: 12px;}
 .vertical-spacing {margin: 8px 0px;}
-.table-element {margin: 0px 8px;}
+.table-element {margin: 0px 8px; border-radius: 5px;}
 .table0 {background-color: rgb(115, 255, 255);}
 .table1 {background-color: #87CEEB;}
 .main-container {margin: 16px;}
