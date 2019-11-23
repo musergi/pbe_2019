@@ -10,6 +10,10 @@ from gi.repository import Gtk, GLib, Gdk
 
 from controller import Controller # Controller class import
 
+
+GREATING_MESSAGE = 'Welcome, {}'
+
+
 class Interface:
     """Parent class of all other interface classes.
     This class is in charge of interacting with the controller. It is also
@@ -141,7 +145,7 @@ class FrameTable(Gtk.Grid):
         self._parent = parent
         
         self._name_label = Gtk.Label()
-        self._name_label.set_justify(Gtk.Justification.RIGHT)
+        StyleManager.add_class(self._name_label, 'small-font')
         self.attach(self._name_label, 2, 0, 1, 1)
 
         self._label = Gtk.Label(label='Querry')
@@ -167,7 +171,7 @@ class FrameTable(Gtk.Grid):
 
     def set_student(self, student):
         logging.debug('Setting student name')
-        self._name_label.set_label(student.get_name())
+        self._name_label.set_label(GREATING_MESSAGE.format(student.get_name()))
 
 
 if __name__ == '__main__':
