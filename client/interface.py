@@ -11,7 +11,7 @@ from gi.repository import Gtk, GLib, Gdk
 from controller import Controller # Controller class import
 
 
-GREATING_MESSAGE = 'Welcome, {}'
+GREATING_MESSAGE = 'Welcome, <b>{}</b>'
 LOGIN_MESSAGE = 'Enter university card to login'
 
 
@@ -180,7 +180,7 @@ class FrameTable(Gtk.Grid):
 
     def set_student(self, student):
         logging.debug('Setting student name')
-        self._name_label.set_label(GREATING_MESSAGE.format(student.get_name()))
+        self._name_label.set_markup(GREATING_MESSAGE.format(student.get_name()))
 
 
 if __name__ == '__main__':
