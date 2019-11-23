@@ -10,6 +10,8 @@ def str_to_params(string):
         param_name, param_value = param.split('=')
         if is_number(param_value):
             params[param_name] = param_value
+        elif param_value == 'now':
+            params[param_name] = 'NOW()'
         else:
             params[param_name] = f'"{param_value}"'
 
@@ -17,7 +19,7 @@ def str_to_params(string):
 
 
 def replace_elements(string):
-    return string.replace('[', '(').replace(']', ')').replace('now', 'NOW()')
+    return string.replace('[', '(').replace(']', ')')
 
 
 def is_number(string):
