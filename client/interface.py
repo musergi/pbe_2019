@@ -119,6 +119,7 @@ class TableRenderer:
     @staticmethod
     def render_csv(csv):
         table = Gtk.Grid()
+        StyleManager.add_class(table, 'table-container')
 
         for num_row, row in enumerate(csv.split('\n')[:-1]):
             for num_col, col in enumerate(row.split(',')):
