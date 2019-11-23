@@ -6,9 +6,9 @@ $connection = access_database();
 require_once 'parsing_utils.php';
 $user_query = 'SELECT * FROM ' . 
             $_GET["table_name"] .
-            parse_restrictions() .
-            parse_ordering() .
-            parse_limit() .
+            parse_restrictions() . //returns WHERE
+            parse_ordering() . //returns ORDER BY
+            parse_limit() . //returns LIMIT
             ';';
 
 $result = mysqli_query($connection, $user_query);

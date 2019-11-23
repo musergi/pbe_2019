@@ -70,7 +70,7 @@ function get_ordering_cols() {
     switch ($_GET['table_name']) {
         case 'timetables': return 'day, hour';
         case 'marks': return 'subject';
-        case 'tasks': return 'tasks';
+        case 'tasks': return 'date';
         default: return '';
     }
 }
@@ -87,7 +87,6 @@ function is_diplayable_col($col) {
         'id',
         'student'
     );
-    echo !in_array($col->name, $banned_cols);
     return !in_array($col->name, $banned_cols);
 }
 
