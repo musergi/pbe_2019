@@ -9,7 +9,6 @@ from io import StringIO
 # Module imports
 from .student import Student
 
-#Useful information: https://docs.python.org/3.1/howto/urllib2.html
 URL ='http://192.168.1.134:8000/python/' 
 
 def get_request(url, params):

@@ -43,6 +43,9 @@ class Interface:
         self._root.show_all()
         logging.debug('Showing interface')
 
+        # Wait for user login
+        self._controller.wait_login()
+
     def select_frame(self, frame_name):
         """Makes visible the frame with the specified name.
         If a frame is already displaying removes it, then sets
@@ -134,7 +137,7 @@ class FrameLogin(Gtk.Box):
         self.add(self._label)
 
 
-class FrameTable(Gtk.Box):
+class FrameTable(Gtk.Grid):
     """Frame use for searching the database"""
     def __init__(self, parent):
         Gtk.Box.__init__(self, orientation=Gtk.Orientation.VERTICAL)
@@ -142,17 +145,17 @@ class FrameTable(Gtk.Box):
         
         self._name_label = Gtk.Label()
         self._name_label.set_justify(Gtk.Justification.RIGHT)
-        self.add(self._name_label)
+        self.attach(self._name_label, 2, 0, 1, 1)
 
         self._label = Gtk.Label(label='Querry')
-        self.add(self._label)
+        self.attach(self._label, 0, 1, 1, 1)
 
         self._entry = Gtk.Entry()
-        self.add(self._entry)
+        self.attach(self._entry, 0, 2, 2, 1)
 
         self._button = Gtk.Button(label='Search')
         self._button.connect('clicked', self._parent.query)
-        self.add(self._button)
+        self.attach(self._button, 2, 2, 1, 1)
 
         self._table = None
 
@@ -163,7 +166,7 @@ class FrameTable(Gtk.Box):
         if self._table is not None:
             self.remove(self._table)
         self._table = table
-        self.add(self._table)
+        self.attach(self._table, 0, 3, 3, 1)
 
     def set_student(self, student):
         logging.debug('Setting student name')

@@ -9,7 +9,6 @@ class Controller:
         self._interface = interface
         self._rfid_reader = RfidReader()
         self._student = None
-        self.wait_login()
 
     def wait_login(self):
         """Waits for rfid card input and when a card is inputed
@@ -34,29 +33,7 @@ class Controller:
 
     def _do_request(self, query_str):
         logging.debug(f'Requesting table: {query_str}')
-        table, param_dict = parse_query_str(query_str)
+        table, param_dict = coms.parse.str_to_params(query_str)
         csv_table = coms.core.get_query(self._student, table, param_dict)
         logging.debug(f'Response table: \n{csv_table}')
         self._interface.request_table(csv_table)
-
-
-def parse_query_str(string):
-    if '?' not in string:
-        return string, dict()
-    
-    string = string.replace('[', '(').replace(']', ')')
-
-    table_name, params_str = string.split('?')
-
-    params = dict()
-    for param_str in params_str.split('&'):
-        param_name, param_value = param_str.split('=')
-        if is_number(param_value):
-            params[param_name] = param_value
-        else:
-            params[param_name] = '"' + param_value + '"' #Add double quotes if it is string
-
-    return table_name, params
-
-def is_number(string):
-    return string.replace('.', '', 1).isdigit()
