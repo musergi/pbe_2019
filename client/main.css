@@ -1,11 +1,5 @@
-* {
-    font-size: 16px;
-}
+* {font-size: 16px;}
+button {background-color: #87CEFA;}
 
-.small-font {
-    font-size: 8px;
-}
-
-.main-container {
-    margin: 16px;
-}
+.small-font {font-size: 12px;}
+.main-container {margin: 16px;}
