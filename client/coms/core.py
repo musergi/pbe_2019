@@ -1,9 +1,9 @@
 import logging
 
 # Default Python imports
+import csv
 import urllib.request # Contains communication functions
 from urllib.error import HTTPError
-import csv
 from io import StringIO
 
 # Module imports
