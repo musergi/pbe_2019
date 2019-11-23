@@ -24,7 +24,7 @@ class Interface:
         StyleManager.load_styles('main.css')
 
         # Main container
-        self._container = Gtk.Box()
+        self._container = Gtk.Stack()
         StyleManager.add_class(self._container, 'main-container')
         self._root.add(self._container)
 
@@ -33,7 +33,8 @@ class Interface:
             'login': FrameLogin(self),
             'table': FrameTable(self)
         }
-        self._current_frame = None
+        for name, frame in self._frames.items():
+            self._container.add_named(frame, name)
         self.select_frame('login')
 
         # Init controller
@@ -51,11 +52,7 @@ class Interface:
         If a frame is already displaying removes it, then sets
         the asked frame to current_frame and adds it to the main
         container. Finally redraws the display."""
-        if self._current_frame is not None:
-            self._container.remove(self._current_frame)
-        self._current_frame = self._frames[frame_name]
-        self._container.add(self._current_frame)
-        self._root.show_all()
+        self._container.set_visible_child_name(frame_name)
         logging.debug(f'Selecting frame {frame_name}')
 
     def set_table(self, csv):
