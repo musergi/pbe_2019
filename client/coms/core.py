@@ -1,91 +1,67 @@
 import logging
 
 # Default Python imports
-import urllib.request # Encapsulates communication functions
+import urllib.request # Contains communication functions
 from urllib.error import HTTPError
 import csv
 from io import StringIO
 
+# Module imports
+from .student import Student
+
 #Useful information: https://docs.python.org/3.1/howto/urllib2.html
-url ='http://192.168.1.134:8000/python/' 
+URL ='http://192.168.1.134:8000/python/' 
 
-class CommunicationManager:
-    @staticmethod
-    def get(url):
-        """ Given a URL, connect to that URL and extract the data from the package 
-        Returns (String): the data in utf-8"""
-        logging.debug(f'Requesting: {url}')
-        response = urllib.request.urlopen(url)
-        data = response.read()
-        return data.decode("utf-8")
+def get_request(url, params):
+    """Performs a get request to the given url with the given parameters.
+    The function encodes the parameters into url format. Then creates the
+    url by apending the url to the parameters using '?'. It then performs
+    the request, if it fails this function will raise an HTTPError. Then 
+    it decodes the response and returns it."""
+    # Parse url
+    param_str = urllib.parse.urlencode(params)
+    get_url = f'{url}?{param_str}'
 
-    @staticmethod
-    def get_student(uid):
-        """Sends a request to the server with the entered uid as a parameter.
-        If the response is 404 return None otherwise return a Student object
-        with the id, name, surname and uid stored in it.
-        Returns (Student): Student created from the info provided by the server."""
-        values = {
-            'uid' : uid
-        }
+    # Request
+    logging.debug(f'Resquesting: {get_url}')
+    http_response = urllib.request.urlopen(get_url)
 
-        data = urllib.parse.urlencode(values)
-        url_student = url + 'request_id.php?' + data
-        response_csv = ''
-        try:
-            response_csv = CommunicationManager.get(url_student)
-        except HTTPError as e: 
-            if '404' in str(e):
-                logging.debug("Not found")
-                return None
-        readCSV = csv.DictReader(StringIO(response_csv), delimiter=',')
-        student_info = next(readCSV)
-        student = Student(student_info['id'], student_info['name'], student_info['surname'], student_info['uid'])
-        return student
-        
-    @staticmethod
-    def get_query(student, table_name, params):
-        """Get request with the student id for authentication
-        Send table name and save the information 
-        Returns (table): table is a .csv with all the table's info provided by the server"""
-        values = {
-            'student_id' : student.get_id(),
-            'table_name' : table_name,
-            **params}
+    # Read bytes and decode response
+    data = http_response.read()
+    return data.decode("utf-8")
 
-        data = urllib.parse.urlencode(values)
-        url_query = url + 'request_query.php?' + data
-        table = CommunicationManager.get(url_query)
 
-        return table
-       
+def get_student(uid):
+    """Returns the Student object with corresponding uid.
+    Creates the proper url to perform the get request to. Performs
+    the request specifying the uid if the request recives a 404 then
+    it retuns None. Finally the funtion parses the received csv and
+    returns a new Student object with the received data."""
+    url = f'{URL}request_id.php'
+    csv_str = ''
 
-class Student:
-    """Class representing a student"""
-    def __init__(self, u_id, name, surname, uid):
-        self._id = u_id
-        self._name = name
-        self._surname = surname
-        self._uid = uid
+    try:
+        csv_str = get_request(url, {'uid': uid})
+    except HTTPError as e:
+        if '404' in str(e):
+            logging.debug('User with uid {uid} not found')
+            return None
 
-    def get_id(self):
-        return self._id
+    csv_dict = csv.DictReader(StringIO(csv_str), delimiter=',')
+    student_info = next(csv_dict) # Equivalent to csv_dict[0] but does not generate list
+    return Student(student_info['id'], student_info['name'], student_info['surname'], student_info['uid'])
+
     
-    def get_name(self):
-        return self._name
-    
-    def get_surname(self):
-        return self._surname
+def get_query(student, table, params):
+    """Returns the csv data contained in the given table.
+    Creates the proper url to perform the get request to. Prepares
+    the parameter dictionary and finally returns the received csv 
+    string."""
+    url = f'{URL}request_query.php'
+    query_params = {
+        'student_id': student.get_id(),
+        'table_name': student.get_name(),
+        **params}
 
-    def get_uid(self):
-        return self._uid
-
-    def __str__(self):
-        """String representation of the class."""
-        return f'({self._id},{self._name} {self._surname},{self._uid})'
-
-
-if __name__ == "__main__":
-    cm = CommunicationManager()
-    data = cm.get_student('87A6B812')
-    print(data)
+    csv_data = get_request(url, query_params)
+    return csv_data

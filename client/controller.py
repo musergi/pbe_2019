@@ -1,13 +1,12 @@
 import threading
 import logging
 
-from coms.core import CommunicationManager
+import coms
 from rfid.core import RfidReader
 
 class Controller:
     def __init__(self, interface):
         self._interface = interface
-        self._com_manager = CommunicationManager()
         self._rfid_reader = RfidReader()
         self._student = None
         self.wait_login()
@@ -22,7 +21,7 @@ class Controller:
         while self._student is None:
             uid = self._rfid_reader.read_uid()
             logging.debug(f'Read uid: {uid}')
-            self._student = self._com_manager.get_student(uid)
+            self._student = coms.core.get_student(uid)
         logging.debug('User logged in')
         self._interface.request_student(self._student)
         self._interface.request_frame('table')
@@ -36,7 +35,7 @@ class Controller:
     def _do_request(self, query_str):
         logging.debug(f'Requesting table: {query_str}')
         table, param_dict = parse_query_str(query_str)
-        csv_table = self._com_manager.get_query(self._student, table, param_dict)
+        csv_table = coms.core.get_query(self._student, table, param_dict)
         logging.debug(f'Response table: \n{csv_table}')
         self._interface.request_table(csv_table)
 
