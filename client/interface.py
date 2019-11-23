@@ -163,7 +163,7 @@ class FrameTable(Gtk.Grid):
         if self._table is not None:
             self.remove(self._table)
         self._table = table
-        self.attach(self._table, 0, 3, 3, 1)
+        self.attach(self._table, 0, 3, 4, 1)
 
     def set_student(self, student):
         logging.debug('Setting student name')
