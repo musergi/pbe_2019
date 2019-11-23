@@ -10,8 +10,8 @@ from io import StringIO
 url ='http://192.168.1.134:8000/python/' 
 
 class CommunicationManager:
-
-    def get(self, url):
+    @staticmethod
+    def get(url):
         """ Given a URL, connect to that URL and extract the data from the package 
         Returns (String): the data in utf-8"""
         logging.debug(f'Requesting: {url}')
@@ -19,7 +19,8 @@ class CommunicationManager:
         data = response.read()
         return data.decode("utf-8")
 
-    def get_student(self, uid):
+    @staticmethod
+    def get_student(uid):
         """Sends a request to the server with the entered uid as a parameter.
         If the response is 404 return None otherwise return a Student object
         with the id, name, surname and uid stored in it.
@@ -32,18 +33,18 @@ class CommunicationManager:
         url_student = url + 'request_id.php?' + data
         response_csv = ''
         try:
-            response_csv = self.get(url_student)
+            response_csv = CommunicationManager.get(url_student)
         except HTTPError as e: 
             if '404' in str(e):
-                print ("Not found")
+                logging.debug("Not found")
                 return None
         readCSV = csv.DictReader(StringIO(response_csv), delimiter=',')
         student_info = next(readCSV)
         student = Student(student_info['id'], student_info['name'], student_info['surname'], student_info['uid'])
         return student
         
-
-    def get_query(self, student, table_name, params):
+    @staticmethod
+    def get_query(student, table_name, params):
         """Get request with the student id for authentication
         Send table name and save the information 
         Returns (table): table is a .csv with all the table's info provided by the server"""
@@ -54,7 +55,7 @@ class CommunicationManager:
 
         data = urllib.parse.urlencode(values)
         url_query = url + 'request_query.php?' + data
-        table = self.get(url_query)
+        table = CommunicationManager.get(url_query)
 
         return table
        
@@ -67,7 +68,6 @@ class Student:
         self._surname = surname
         self._uid = uid
 
-    #TODO: Getters
     def get_id(self):
         return self._id
     

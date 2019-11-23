@@ -4,8 +4,6 @@ import logging
 from coms.core import CommunicationManager
 from rfid.core import RfidReader
 
-URL = 'http://10.0.30.203:8000/python/connect_server.php'
-
 class Controller:
     def __init__(self, interface):
         self._interface = interface
@@ -26,6 +24,7 @@ class Controller:
             logging.debug(f'Read uid: {uid}')
             self._student = self._com_manager.get_student(uid)
         logging.debug('User logged in')
+        self._interface.request_student(self._student)
         self._interface.request_frame('table')
 
     def request_query(self, query_str):
@@ -40,10 +39,6 @@ class Controller:
         csv_table = self._com_manager.get_query(self._student, table, param_dict)
         logging.debug(f'Response table: \n{csv_table}')
         self._interface.request_table(csv_table)
-
-    def get_message(self, widget):
-        result = self._com_manager.get(URL)
-        self._interface.text.set_label(result)
 
 
 def parse_query_str(string):
@@ -60,7 +55,7 @@ def parse_query_str(string):
         if is_number(param_value):
             params[param_name] = param_value
         else:
-            params[param_name] = '"' + param_value + '"' #Add double quotes
+            params[param_name] = '"' + param_value + '"' #Add double quotes if it is string
 
     return table_name, params
 

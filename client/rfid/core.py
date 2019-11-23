@@ -13,12 +13,11 @@ class RfidReader:
         self._reader = None
         
         for rfid_reader in  [RfidReader_MFRC_RC522, RfidElechousePN532, RfidReader_pn532_i2c]:
-            
             try: 
                 self._reader = rfid_reader()
                 break
             except Exception: 
-                print("Failed to open Rfid")
+                logging.debug("Failed to open Rfid")
 
         if self._reader is None:
             raise IOError("Rfid not found")
