@@ -59,7 +59,7 @@ def get_query(student, table, params):
     url = f'{URL}request_query.php'
     query_params = {
         'student_id': student.get_id(),
-        'table_name': student.get_name(),
+        'table_name': table,
         **params}
 
     csv_data = get_request(url, query_params)
