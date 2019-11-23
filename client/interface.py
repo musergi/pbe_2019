@@ -12,6 +12,7 @@ from controller import Controller # Controller class import
 
 
 GREATING_MESSAGE = 'Welcome, {}'
+LOGIN_MESSAGE = 'Enter university card to login'
 
 
 class Interface:
@@ -141,7 +142,7 @@ class FrameLogin(Gtk.Box):
         Gtk.Box.__init__(self)
         self._parent = parent
 
-        self._label = Gtk.Label(label='Enter university card to login')
+        self._label = Gtk.Label(label=LOGIN_MESSAGE)
         self.add(self._label)
 
 
@@ -155,7 +156,7 @@ class FrameTable(Gtk.Grid):
         StyleManager.add_class(self._name_label, 'small-font')
         self.attach(self._name_label, 3, 0, 1, 1)
 
-        self._label = Gtk.Label(label='Query')
+        self._label = Gtk.Label(label='QUERY')
         StyleManager.add_class(self._label, 'vertical-spacing')
         self.attach(self._label, 0, 1, 1, 1)
 

@@ -2,7 +2,7 @@ def str_to_params(string):
     if '?' not in string:
         return string, dict()
 
-    string = replace_brackets(string)
+    string = replace_elements(string)
 
     table_name, param_str = string.split('?')
     params = dict()
@@ -16,8 +16,8 @@ def str_to_params(string):
     return table_name, params
 
 
-def replace_brackets(string):
-    return string.replace('[', '(').replace(']', ')')
+def replace_elements(string):
+    return string.replace('[', '(').replace(']', ')').replace('now', 'NOW()')
 
 
 def is_number(string):
