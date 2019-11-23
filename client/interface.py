@@ -148,7 +148,7 @@ class FrameTable(Gtk.Grid):
         StyleManager.add_class(self._name_label, 'small-font')
         self.attach(self._name_label, 2, 0, 1, 1)
 
-        self._label = Gtk.Label(label='Querry')
+        self._label = Gtk.Label(label='Query')
         StyleManager.add_class(self._label, 'vertical-spacing')
         self.attach(self._label, 0, 1, 1, 1)
 
