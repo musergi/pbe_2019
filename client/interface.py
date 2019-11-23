@@ -126,10 +126,6 @@ class TableRenderer:
                     col = col.capitalize()
                 cell_label = Gtk.Label(label=col)
                 StyleManager.add_class(cell_label, 'table-element')
-                if (num_row + num_col) % 2:
-                    StyleManager.add_class(cell_label, 'table1')
-                else:
-                    StyleManager.add_class(cell_label, 'table0')
                 table.attach(cell_label, num_col, num_row, 1, 1)
 
         return table
