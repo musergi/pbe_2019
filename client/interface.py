@@ -123,9 +123,12 @@ class TableRenderer:
 
         for num_row, row in enumerate(csv.split('\n')[:-1]):
             for num_col, col in enumerate(row.split(',')):
-                cell_label = Gtk.Label(label=col.capitalize())
+                cell_label = Gtk.Label()
                 if num_row == 0:
+                    cell_label.set_label(col.capitalize())
                     StyleManager.add_class(cell_label, 'table-header')
+                else:
+                    cell_label.set_label(col)
                 StyleManager.add_class(cell_label, 'table-element')
                 table.attach(cell_label, num_col, num_row, 1, 1)
 
