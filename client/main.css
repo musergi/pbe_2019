@@ -4,5 +4,6 @@ button {background-color: #87CEFA; margin: 0px 8px; border-radius: 5px;}
 
 .small-font {font-size: 12px;}
 .vertical-spacing {margin: 8px 0px;}
-.table-element {padding: 2px; margin: 0px 8px; border-style: solid;}
+.table-container {margin: 8px 16px;}
+.table-element {padding: 2px; margin: 0px 8px; border-style: solid; border-width: 1px;}
 .main-container {margin: 16px;}

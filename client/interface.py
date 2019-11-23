@@ -120,7 +120,7 @@ class TableRenderer:
     def render_csv(csv):
         table = Gtk.Grid()
 
-        for num_row, row in enumerate(csv.split('\n')):
+        for num_row, row in enumerate(csv.split('\n')[:-1]):
             for num_col, col in enumerate(row.split(',')):
                 if num_row == 0:
                     col = col.capitalize()
