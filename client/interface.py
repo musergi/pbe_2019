@@ -166,6 +166,7 @@ class FrameTable(Gtk.Box):
         self.add(self._table)
 
     def set_student(self, student):
+        logging.debug('Setting student name')
         self._name_label.set_label(student.get_name())
 
 
