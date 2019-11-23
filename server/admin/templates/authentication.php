@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html style="height: 100%">
-<head>
-    <?php
-    $title = "Admin";
-    include('admin_head.php');
-    ?>
-</head>
+<?php
+$title = "Admin";
+include('admin_head.php');
+?>
 <body style="height: 100%;">
     <header>
         <h1 class="main-title">Admin</h1>
