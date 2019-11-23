@@ -123,6 +123,7 @@ class TableRenderer:
         for num_row, row in enumerate(csv.split('\n')):
             for num_col, col in enumerate(row.split(',')):
                 cell_label = Gtk.Label(label=col)
+                StyleManager.add_class(cell_label, 'table-element')
                 table.attach(cell_label, num_col, num_row, 1, 1)
 
         return table
