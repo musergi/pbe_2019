@@ -1,7 +1,7 @@
 * {font-size: 16px;}
 window {background-color: #FFFFFF;}
 button {background-color: #87CEFA; margin: 0px 8px; border-radius: 5px;}
-entry {margin: 8px 16px;}
+entry {margin: 0px 16px;}
 
 .small-font {font-size: 12px;}
 .vertical-spacing {margin: 8px 0px;}
