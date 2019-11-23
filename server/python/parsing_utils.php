@@ -42,6 +42,9 @@ function add_special_restriction(& $restrictions) {
     if ($_GET['table_name'] == 'marks') {
         array_push($restrictions, 'student=' . $_GET['student_id']);
     }
+    if ($_GET['table_name'] == 'tasks') {
+        array_push($restrictions, 'date>=NOW()');
+    }
 }
 
 function get_symbol($string) {
@@ -94,6 +97,19 @@ function get_name(& $col) {
     $col = $col->name;
 }
 
+function num_to_weekday($num) {
+    switch ($num) {
+        case 1: return 'Monday';
+        case 2: return 'Tuesday';
+        case 3: return 'Wednesday';
+        case 4: return 'Thursday';
+        case 5: return 'Friday';
+        case 6: return 'Saturday';
+        case 7: return 'Sunday';
+        default: return 'None';
+    }
+}
+
 function query_to_csv($query_result) {
     $cols = mysqli_fetch_fields($query_result);
     $cols = array_filter($cols, "is_diplayable_col");
@@ -103,6 +119,9 @@ function query_to_csv($query_result) {
     while($row = mysqli_fetch_assoc($query_result)){
         $data = array();
         foreach ($cols as $col) {
+            if ($col == 'day') {
+                $row[$col] = num_to_weekday($row[$col]);
+            }
             array_push($data, $row[$col]);
         }
         $csv_string = $csv_string . implode(",", $data) . "\n";
