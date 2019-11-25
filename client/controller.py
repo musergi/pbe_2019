@@ -2,6 +2,7 @@ import threading
 import logging
 
 import coms
+import lcd
 from rfid.core import RfidReader
 
 class Controller:
@@ -17,6 +18,7 @@ class Controller:
         threading.Thread(target=self._login, daemon=True).start()
 
     def _login(self):
+        lcd.core.LcdManager.display_login_message()
         while self._student is None:
             uid = self._rfid_reader.read_uid()
             logging.debug(f'Read uid: {uid}')
@@ -24,6 +26,7 @@ class Controller:
         logging.debug('User logged in')
         self._interface.request_student(self._student)
         self._interface.request_frame('table')
+        lcd.core.LcdManager.display_student_greating(self._student.get_name(), self._student.get_surname())
 
     def request_query(self, query_str):
         """From a string querry changes the display content to the querry
