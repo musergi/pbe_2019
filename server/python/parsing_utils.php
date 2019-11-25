@@ -71,7 +71,7 @@ function parse_ordering() {
 
 function get_ordering_cols() {
     switch ($_GET['table_name']) {
-        case 'timetables': return 'day, hour';
+        case 'timetables': return 'CASE WHEN day=WEEKDAY(NOW()) AND hour>TIME(NOW()) THEN 0 WHEN day>WEEKDAY(NOW()) THEN 1 ELSE 2 END';
         case 'marks': return 'subject';
         case 'tasks': return 'date';
         default: return '';
@@ -99,13 +99,13 @@ function get_name(& $col) {
 
 function num_to_weekday($num) {
     switch ($num) {
-        case 1: return 'Monday';
-        case 2: return 'Tuesday';
-        case 3: return 'Wednesday';
-        case 4: return 'Thursday';
-        case 5: return 'Friday';
-        case 6: return 'Saturday';
-        case 7: return 'Sunday';
+        case 0: return 'Monday';
+        case 1: return 'Tuesday';
+        case 2: return 'Wednesday';
+        case 3: return 'Thursday';
+        case 4: return 'Friday';
+        case 5: return 'Saturday';
+        case 6: return 'Sunday';
         default: return 'None';
     }
 }
