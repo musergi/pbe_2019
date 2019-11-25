@@ -7,7 +7,7 @@ from . import driver
 NUM_COLUMNS = 20
 
 LOGIN_MESSAGE = 'Please login with your university card'
-GREATING_MESSAGE = '\nWelcome,\n{}\n'
+GREATING_MESSAGE = '\n      Welcome,\n{}\n'
 
 
 class LcdManager:
