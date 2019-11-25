@@ -4,7 +4,7 @@ import math
 from . import driver
 
 
-NUM_COLUMNS = 24
+NUM_COLUMNS = 20
 
 LOGIN_MESSAGE = 'Please login with your university card'
 GREATING_MESSAGE = '\nWelcome,\n{}\n'
