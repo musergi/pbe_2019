@@ -9,7 +9,7 @@ from io import StringIO
 # Module imports
 from .student import Student
 
-URL ='http://192.168.1.134:8000/python/' 
+URL ='http://10.0.30.203:8000/python/'
 
 def get_request(url, params):
     """Performs a get request to the given url with the given parameters.
