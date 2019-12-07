@@ -49,9 +49,6 @@ class Interface:
         self._root.show_all()
         logging.debug('Showing interface')
 
-        # Wait for user login
-        self._controller.wait_login()
-
     def select_frame(self, frame_name):
         """Makes visible the frame with the specified name.
         If a frame is already displaying removes it, then sets
