@@ -10,11 +10,15 @@
             $username,
             $password,
             $database_name);
-            
         if (!$connection) {
             die("Connection failed: " . mysqli_connect_error());
         }
-
         return $connection;
+    }
+    function query_database($query) {
+        $connection = access_database();
+        $result = mysqli_query($connection, $query);
+        mysqli_close($connection);
+        return $result;
     }
 ?>

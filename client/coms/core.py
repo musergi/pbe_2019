@@ -1,4 +1,4 @@
-import logging
+import threading
 
 # Default Python imports
 import csv
@@ -7,48 +7,35 @@ from urllib.error import HTTPError
 from io import StringIO
 
 # Module imports
+from .parse import parse_csv_to_dict
 from .student import Student
 
 URL ='http://10.0.30.203:8000/python/'
 
-def get_request(url, params):
-    """Performs a get request to the given url with the given parameters.
-    The function encodes the parameters into url format. Then creates the
-    url by apending the url to the parameters using '?'. It then performs
-    the request, if it fails this function will raise an HTTPError. Then 
-    it decodes the response and returns it."""
-    # Parse url
-    param_str = urllib.parse.urlencode(params)
-    get_url = f'{url}?{param_str}'
 
-    # Request
-    logging.debug(f'Resquesting: {get_url}')
-    http_response = urllib.request.urlopen(get_url)
-
-    # Read bytes and decode response
-    data = http_response.read()
-    return data.decode("utf-8")
+def get_request(url, params=None):
+    """Performs a http GET request to the given url with the given parameters."""
+    if params is not None:
+        args = urllib.parse.urlencode(params)
+        url = url + '?' + args
+    http_response = urllib.request.urlopen(url)
+    return http_response.read().decode("utf-8")
 
 
-def get_student(uid):
-    """Returns the Student object with corresponding uid.
-    Creates the proper url to perform the get request to. Performs
-    the request specifying the uid if the request recives a 404 then
-    it retuns None. Finally the funtion parses the received csv and
-    returns a new Student object with the received data."""
-    url = f'{URL}request_id.php'
-    csv_str = ''
+def login(url, credentials, handle):
+    task = lambda: get_student(url, credentials, handle)
+    threading.Thread(target=task, daemon=True).start()
 
-    try:
-        csv_str = get_request(url, {'uid': uid})
-    except HTTPError as e:
-        if '404' in str(e):
-            logging.debug('User with uid {uid} not found')
-            return None
 
-    csv_dict = csv.DictReader(StringIO(csv_str), delimiter=',')
-    student_info = next(csv_dict) # Equivalent to csv_dict[0] but does not generate list
-    return Student(student_info['id'], student_info['name'], student_info['surname'], student_info['uid'])
+def get_student(url, credentials, handle):
+    response = get_request(url, credentials)
+    student_info = next(parse_csv_to_dict(response))
+    student = Student(
+        student_info['id'],
+        student_info['name'],
+        student_info['surname'],
+        student_info['uid'])
+    handle(student)
 
     
 def get_query(student, table, params):

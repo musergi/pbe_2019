@@ -9,21 +9,14 @@ class Controller:
     def __init__(self, interface):
         self._interface = interface
         self._rfid_reader = RfidReader()
+        self._url = coms.parse.parse_url()
         self._student = None
 
-    def wait_login(self):
-        """Waits for rfid card input and when a card is inputed
-        sends a request asking for this student through the communication
-        manager if the requests fails asks interface for an error screen"""
-        threading.Thread(target=self._login, daemon=True).start()
+    def login(self, credentials):
+        coms.core.login(self._url, credentials, self.on_login)
 
-    def _login(self):
-        lcd.core.LcdManager.display_login_message()
-        while self._student is None:
-            uid = self._rfid_reader.read_uid()
-            logging.debug(f'Read uid: {uid}')
-            self._student = coms.core.get_student(uid)
-        logging.debug('User logged in')
+    def on_login(self, student):
+        self._student = student
         self._interface.request_student(self._student)
         self._interface.request_frame('table')
         lcd.core.LcdManager.display_student_greating(self._student.get_name(), self._student.get_surname())

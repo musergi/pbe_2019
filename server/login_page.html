@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Minerva</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+    html, body {height: 100%; margin: 0; font-family: Verdana, Geneva, Tahoma, sans-serif;}
+    .h-100 {height: 100%;}
+    .h-90 {height: 90%;}
+    .h-80 {height: 80%;}
+    .h-20 {height: 20%;}
+    .h-10 {height: 10%;}
+    .h-5 {height: 5%;}
+    .col6 {float: left; width: 50%;}
+    .text-center {text-align: center;}
+    .bg-primary {background-color: #85A2A6;}
+    .bg-secondary {background-color: #D9CEB0;}
+    .bg-terciary {background-color: #F2DDB6;}
+    .bg-warning {background-color: #F28444;}
+    .bg-error {background-color: #D95D41;}
+    .text-primary {color: #85A2A6;}
+    .text-white {color: white;}
+    .text-black {color: black;}
+    .padded-header {margin: 0; padding: 0.5em 0em;}
+    .padding-1line {padding: 1em 1em;}
+    .top-margin {margin-top: 10em;}
+    .submit-button {padding: 0.5em 1em; border-radius: 5px; border: none; margin-top: 1em; font-size: 0.9em; font-weight: 900; background-color: #F28444;}
+    .submit-button:hover {background-color: #D95D41;}
+    .field-input {padding: 0.5em; border: none; border-radius: 5px; margin: 0.5em;}
+    </style>
+  </head>
+  <body class="bg-terciary">
+    <header class="h-10">
+      <h1 class="padded-header text-center text-black bg-primary">Minerva</h1>
+    </header>
+    <div class="h-90 text-center">
+      <div class="col6 top-margin">
+        <h1 class="text-black">Log in</h1>
+        <form action="/backend/web_app/login.php" method="POST">
+            <label class="text-black">Username</label><br>
+            <input class="field-input" type="text" name="username"><br>
+            <label class="text-black">Password</label><br>
+            <input class="field-input" type="password" name="password"><br>
+            <input class="submit-button text-white" type="submit" value="Log in">
+        </form>
+      </div>
+      <div class="col6 top-margin">
+        <h1 class="text-black">Sign up</h1>
+        <form action="/backend/web_app/signup.php" method="POST">
+            <label class="text-black">Username</label><br>
+            <input class="field-input" type="text" name="username"><br>
+            <label class="text-black">Password</label><br>
+            <input class="field-input" type="password" name="password"><br>
+            <label class="text-black">Confirm password</label><br>
+            <input class="field-input" type="password" name="password_confirmation"><br>
+            <input class="submit-button text-white" type="submit" value="Sign up">
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+

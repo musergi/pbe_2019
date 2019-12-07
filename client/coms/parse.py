@@ -1,3 +1,15 @@
+import sys
+import csv
+
+
+def parse_csv_to_dict(string):
+    return csv.DictReader(csv.StringIO(string))
+
+
+def parse_url():
+    return 'http://' + sys.argv[1]
+
+
 def str_to_params(string):
     if '?' not in string:
         return string, dict()

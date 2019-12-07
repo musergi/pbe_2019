@@ -18,6 +18,7 @@
             $table_url = '/admin/table.php';
             $table_names = array(
 //                'admins',
+                'users',
                 'students',
                 'timetables',
                 'marks',
