@@ -15,7 +15,7 @@ def read_uid(handle):
     reader = None
     for rfid_reader in  [RfidReader_MFRC_RC522, RfidElechousePN532, RfidReader_pn532_i2c]:
             try: 
-                self._reader = rfid_reader()
+                reader = rfid_reader()
                 break
             except Exception:
                 pass
