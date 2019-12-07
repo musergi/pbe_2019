@@ -23,6 +23,7 @@ def read_uid(handle):
         raise IOError
     while True:
         uid = reader.read_uid()
+        print(uid)
         handle({'uid': uid})
         
 class RfidReader:
