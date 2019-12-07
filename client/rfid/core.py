@@ -1,12 +1,32 @@
 import logging
+import threading
 
 from py532lib.mifare import Mifare
 from pynfc import Nfc, Timeout
 import RPi.GPIO as GPIO
 from mfrc522 import SimpleMFRC522
 
+
+def wait_swipe(handle):
+    task = lambda: read_uid(handle)
+    threading.Thread(target=)
+
+def read_uid(handle):
+    reader = None
+    for rfid_reader in  [RfidReader_MFRC_RC522, RfidElechousePN532, RfidReader_pn532_i2c]:
+            try: 
+                self._reader = rfid_reader()
+                break
+            except Exception:
+                pass
+    if reader is None:
+        raise IOError
+    while True:
+        uid = reader.read_uid()
+        handle({'uid': uid})
+        
 class RfidReader:
-    def __init__(self):
+    def __init__(self, handle):
         """Polls for rfid readers until one is found and it performs
         the adapting work."""
 

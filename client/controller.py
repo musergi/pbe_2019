@@ -3,13 +3,13 @@ import logging
 
 import coms
 import lcd
-from rfid.core import RfidReader
+from rfid.core import RfidReader, wait_swipe
 
 class Controller:
     def __init__(self, interface):
         self._interface = interface
-        self._rfid_reader = RfidReader()
         self._url = coms.parse.parse_url()
+        wait_swipe(self.login)
         self._student = None
 
     def login(self, credentials):
