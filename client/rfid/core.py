@@ -9,7 +9,7 @@ from mfrc522 import SimpleMFRC522
 
 def wait_swipe(handle):
     task = lambda: read_uid(handle)
-    threading.Thread(target=task, daemon=True)
+    threading.Thread(target=task, daemon=True).start()
 
 def read_uid(handle):
     reader = None
