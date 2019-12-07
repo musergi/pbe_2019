@@ -7,7 +7,7 @@ def parse_csv_to_dict(string):
 
 
 def parse_url():
-    return 'http://' + sys.argv[1]
+    return 'http://' + sys.argv[1] + '/backend/python/'
 
 
 def str_to_params(string):

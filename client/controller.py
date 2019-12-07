@@ -13,7 +13,7 @@ class Controller:
         self._student = None
 
     def login(self, credentials):
-        coms.core.login(self._url, credentials, self.on_login)
+        coms.core.login(self._url + 'login.php', credentials, self.on_login)
 
     def on_login(self, student):
         self._student = student
