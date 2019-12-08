@@ -81,7 +81,7 @@ class Interface:
     def query(self, widget):
         """Asks the controller for a table"""
         query_str = self._frames['table'].get_entry_text()
-        self._controller.request_query(query_str)
+        self._controller.query(query_str)
 
     def mainloop(self):
         """Starts the interface loop"""
@@ -119,8 +119,8 @@ class TableRenderer:
         table = Gtk.Grid()
         StyleManager.add_class(table, 'table-container')
 
-        for num_row, row in enumerate(csv.split('\n')[:-1]):
-            for num_col, col in enumerate(row.split(',')):
+        for num_row, row in enumerate(csv):
+            for num_col, col in enumerate(row):
                 cell_label = Gtk.Label()
                 if num_row == 0:
                     cell_label.set_label(col.capitalize())

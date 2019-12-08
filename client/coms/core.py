@@ -7,7 +7,7 @@ from urllib.error import HTTPError
 from io import StringIO
 
 # Module imports
-from .parse import parse_csv_to_dict
+from .parse import parse_csv_to_dict, parse_csv_to_list
 from .student import Student
 
 URL ='http://10.0.30.203:8000/python/'
@@ -37,6 +37,14 @@ def get_student(url, credentials, handle):
         student_info['uid'])
     handle(student)
 
+def query(url, args, handle):
+    task = lambda: get_query(url, args, handle)
+    threading.Thread(target=task, daemon=True).start()
+
+def get_query(url, args, handle):
+    response = get_request(url, args)
+    csv_list = parse_csv_to_list(response)
+    handle(csv_list)
     
 def get_query(student, table, params):
     """Returns the csv data contained in the given table.

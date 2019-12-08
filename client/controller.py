@@ -21,6 +21,12 @@ class Controller:
         self._interface.request_frame('table')
         lcd.core.LcdManager.display_student_greating(self._student.get_name(), self._student.get_surname())
 
+    def query(self, query):
+        coms.core.query(self._url + 'query.php', {'id':self._student.get_id()}, self.on_query_response)
+
+    def on_query_response(self, response):
+        self._interface.request_table(response)
+
     def request_query(self, query_str):
         """From a string querry changes the display content to the querry
         result."""

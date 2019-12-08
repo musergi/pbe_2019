@@ -6,6 +6,10 @@ def parse_csv_to_dict(string):
     return csv.DictReader(csv.StringIO(string))
 
 
+def parse_csv_to_list(string):
+    return list(csv.reader(csv.StringIO(string)))
+
+
 def parse_url():
     return 'http://' + sys.argv[1] + '/backend/python/'
 
