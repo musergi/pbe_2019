@@ -57,6 +57,25 @@ function parse_limit($fragments) {
     return '';
 }
 
+function query_to_html($result) {
+    $head = '';
+    $col_names = array();
+    while ($col = mysqli_fetch_field($result)) {
+        if ($col->name != "id" && $col->name != "student") {
+            $head = $head . '<th>' . ucfirst($col->name) . '</th>';
+            array_push($col_names, $col->name);
+        }
+    }
+    $content = '';
+    while ($row = mysqli_fetch_array($result)) {
+        $content = $content . "<tr>";
+        foreach ($col_names as $item) {
+            $content = $content . '<td>' . ($item != 'day' ? $row[$item] : get_weekday($row[$item])) . '</td>';
+        }
+        $content = $content . '</tr>';
+    }
+    return "<table><tr>$head</tr>$content</table>";
+}
 function query_to_csv($result) {
     $col_names = array();
     while ($col = mysqli_fetch_field($result)) {
@@ -70,7 +89,7 @@ function query_to_csv($result) {
         foreach ($col_names as $item) {
             array_push($row_elements, $item != 'day' ? $row[$item] : get_weekday($row[$item]));
         }
-        $content = $content . implode($row_elements) . "\n";
+        $content = $content . implode(',', $row_elements) . "\n";
     }
     return implode(",", $col_names) . "\n" . $content;
 }

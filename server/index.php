@@ -5,9 +5,10 @@
         $table = '';
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             require_once 'database/database.php';
-            require_once 'backend/web_app/parse.php';
-            $result = mysqli_query(access_database(), parse_request($_POST['query']));
-            $table = render_query($result);
+            require_once 'backend/parse.php';
+            $result = query_database(parse_query($_SESSION['student'], $_POST['query']));
+            if ($result !== FALSE && mysqli_num_rows($result) > 0)
+                $table = query_to_html($result);
         }
         include('query.php');
     } else {
