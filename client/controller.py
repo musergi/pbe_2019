@@ -22,7 +22,10 @@ class Controller:
         lcd.core.LcdManager.display_student_greating(self._student.get_name(), self._student.get_surname())
 
     def query(self, query):
-        coms.core.query(self._url + 'query.php', {'id':self._student.get_id()}, self.on_query_response)
+        coms.core.query(
+            self._url + 'query.php',
+            {'id':self._student.get_id(), 'query': query},
+            self.on_query_response)
 
     def on_query_response(self, response):
         self._interface.request_table(response)
