@@ -45,17 +45,3 @@ def get_query(url, args, handle):
     response = get_request(url, args)
     csv_list = parse_csv_to_list(response)
     handle(csv_list)
-    
-def get_query(student, table, params):
-    """Returns the csv data contained in the given table.
-    Creates the proper url to perform the get request to. Prepares
-    the parameter dictionary and finally returns the received csv 
-    string."""
-    url = f'{URL}request_query.php'
-    query_params = {
-        'student_id': student.get_id(),
-        'table_name': table,
-        **params}
-
-    csv_data = get_request(url, query_params)
-    return csv_data
