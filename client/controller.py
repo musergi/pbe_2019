@@ -9,6 +9,7 @@ class Controller:
     def __init__(self, interface):
         self._interface = interface
         self._url = coms.parse.parse_url()
+        lcd.core.LcdManager.display_login_message()
         wait_swipe(self.login)
         self._student = None
 
@@ -29,16 +30,3 @@ class Controller:
 
     def on_query_response(self, response):
         self._interface.request_table(response)
-
-    def request_query(self, query_str):
-        """From a string querry changes the display content to the querry
-        result."""
-        request_func = lambda: self._do_request(query_str)
-        threading.Thread(target=request_func, daemon=True).start()
-
-    def _do_request(self, query_str):
-        logging.debug(f'Requesting table: {query_str}')
-        table, param_dict = coms.parse.str_to_params(query_str)
-        csv_table = coms.core.get_query(self._student, table, param_dict)
-        logging.debug(f'Response table: \n{csv_table}')
-        self._interface.request_table(csv_table)
